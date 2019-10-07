@@ -21,7 +21,7 @@ fs.readdir("./cmds", (err, files) => {
   });
 });
 program.on('ready', async () => {
-  program.user.setPresence({ game: { name: `I am playing Undertale on ${program.guilds.size} servers!` }, status: 'online' })
+  program.user.setPresence({ game: { name: `I am farming on ${program.guilds.size} servers!` }, status: 'online' })
 
 });
 program.on("message", async message => {
