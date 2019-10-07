@@ -7,6 +7,7 @@ module.exports.run = async (client, message, args) => {
         .addField('=>help', 'Help menu')
         .addField('=>plant', 'Plant a seed')
         .addField('=>shop', 'show the store')
+
     message.author.send(embed1)
 }
 module.exports.info = {
