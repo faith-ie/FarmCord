@@ -9,6 +9,6 @@ module.exports.run = async(client, message, args) => {
     .addField('=>shop', 'show the store')
     message.author.send(embed1)
 }
-module.exports.program = {
+module.exports.client = {
 name: "help"
 }
