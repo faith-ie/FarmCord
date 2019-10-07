@@ -1,8 +1,8 @@
 const config = require("./config.json");
 const Discord = require('discord.js');
 const fs = require("fs");
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
+const program = new Discord.Client();
+program.commands = new Discord.Collection();
 
 fs.readdir("./cmds", (err, files) => {
 
@@ -16,11 +16,15 @@ fs.readdir("./cmds", (err, files) => {
   jsfile.forEach((f, i) =>{
     let props = require(`./cmds/${f}`);
     console.log(`${f} loaded!`);
-    client.commands.set(props.config.name, props);
+    program.commands.set(props.program.name, props);
     console.log(props)
   });
 });
-client.on("message", async message => {
+program.on('ready', async () => {
+  program.user.setPresence({ game: { name: `I am playing Undertale on ${program.guilds.size} servers!` }, status: 'online' })
+
+});
+program.on("message", async message => {
 
     if(message.channel.type === "dm") return;
   
@@ -33,9 +37,9 @@ client.on("message", async message => {
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
   
-    let commandfile = client.commands.get(cmd.slice(prefix.length));
-    if(commandfile) commandfile.run(client,message,args)
+    let commandfile = program.commands.get(cmd.slice(prefix.length));
+    if(commandfile) commandfile.run(program,message,args)
     
   });
   
-  client.login(config.token)
+  program.login(config.token)
