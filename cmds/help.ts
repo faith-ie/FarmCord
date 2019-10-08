@@ -1,5 +1,4 @@
-const Discord = require('discord.js');
-const prefix = require('../config.json')
+import * as Discord from 'discord.js'
 module.exports.run = async(client, message, args) => {
     let embed1 = new Discord.RichEmbed()
     .setTitle("FarmCord Help Menu")
