@@ -1,5 +1,5 @@
 import * as semver from 'semver'
-(!semver.statisfies(process.version,'=> 12.11.1'));
+if(!semver.statisfies(process.version,'=> 12.11.1'));
 // Imports and stuff
 
 import { Client, Collection } from 'discord.js';
