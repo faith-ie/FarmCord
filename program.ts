@@ -1,5 +1,5 @@
 import * as semver from 'semver'
-if(semver.satifies(process.version,'=> 12.11.1')) throw new Error("You need node version 12.11.1 or higher, please upgrade");
+if(semver.satisfies(process.version,'=>12.11.1'))  throw new Error ("You need node version 12.11.1 or higher");
 // Imports and stuff
 
 import { Client, Collection } from 'discord.js';
