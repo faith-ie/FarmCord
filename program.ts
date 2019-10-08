@@ -1,5 +1,5 @@
-if (Number(process.version.slice(1).split(".")[0]) < 12.11.1) throw new Error("Node 12.11.1 or higher is required. Update Node on your system.");
-process.title = 'FarmCord'
+import * as semver from 'semver'
+(!semver.statisfies(process.version,'=> 12.11.1'));
 // Imports and stuff
 
 import { Client, Collection } from 'discord.js';
