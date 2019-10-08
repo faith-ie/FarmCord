@@ -1,4 +1,5 @@
 if (Number(process.version.slice(1).split(".")[0]) < 12.11.1) throw new Error("Node 12.11.1 or higher is required. Update Node on your system.");
+process.title = 'FarmCord'
 // Imports and stuff
 
 import { Client, Collection } from 'discord.js';
