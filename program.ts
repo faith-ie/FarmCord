@@ -12,6 +12,7 @@ declare module 'discord.js' {
 	}
 }
 
+//LOVE PETER
 const client: Client = new Client();
 
 client.commands = new Collection()
