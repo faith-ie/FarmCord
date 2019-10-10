@@ -1,12 +1,10 @@
 import * as semver from 'semver'
 if(semver.satisfies(process.version,'=>12.11.1'))  throw new Error ("You need node version 12.11.1 or higher");
-// Imports and stuff
-
 import { Client, Collection } from 'discord.js';
 import { prefix, token } from './config.json';
 import { readdir } from 'fs';
-
-// Quick fix for "commands does not exist on type 'Client'" error
+import * as mongoose from 'mongoose';
+mongoose.connect('mongodb://localhost:27017/FarmCord', { useNewUrlParser: true };
 
 declare module 'discord.js' {
 	interface Client {
@@ -14,13 +12,9 @@ declare module 'discord.js' {
 	}
 }
 
-// Construct the client
-
 const client: Client = new Client();
 
 client.commands = new Collection()
-
-// Read commands
 
 readdir("./cmds", (err, files) => {
 
@@ -38,8 +32,6 @@ readdir("./cmds", (err, files) => {
 		console.log(props)
 	});
 });
-
-// Message event to process commands
 
 client.on("message", async message => {
 
