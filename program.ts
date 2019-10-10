@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost:27017/FarmCord', { useNewUrlParser: true }
 
 declare module 'discord.js' {
 	interface Client {
-		commands: Collection<String, any> // Putting 'any' due to their being no type for 'command' you can fix this later
+		commands: Collection<String, any>
 	}
 }
 
