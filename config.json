@@ -1,4 +1,5 @@
 {
     "prefix": "=>",
-    "token": "Token Goes Here"
+    "token": "Token Here",
+    "owner": [ "Id here if you want to add more than one owner, add it like this", "owner 2 id"]
 }
