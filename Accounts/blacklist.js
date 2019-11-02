@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
-const blacklistSchema = mongoose.Schema ({
+const blackListSchemaUser = mongoose.Schema ({
         username: String,
         userID: String,
         BannedDate: String,
         Reason: String
 })
-module.exports = mongoose.model("blacklist", blacklistSchema);
+
+
+module.exports = mongoose.model("blacklistUser", blackListSchemaUser);

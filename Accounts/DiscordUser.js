@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const DiscordUserSchema = mongoose.schema ({
+const DiscordUserSchema = mongoose.Schema ({
     userID: String,
     votedCounter: Number,
     cash: Number,

@@ -4,7 +4,6 @@ module.exports = client => {
 
     //read comands folder to get internal folders
     fs.readdir(`${__dirname}/../cmds/`, (err, files) => {
-         
         if (err) console.log(err);
 
         //for each internal folder

@@ -1,11 +1,9 @@
 const { owner } = require('../../config.json')
 module.exports.run = async (client, message, args) => {
-    if(owner.includes(message.author.id))
-    message.channel.send("Goodbye! 👋").then(process.exit);
-    else return
+  if (owner.includes(message.author.id)) { message.channel.send('Goodbye! 👋').then(process.exit) }
 }
 
 module.exports.info = {
-    name: "shutdown",
-    aliases: [ "die" ]
+  name: 'shutdown',
+  aliases: ['die']
 }
