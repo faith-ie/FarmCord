@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const { owner } = require('../../config.json')
 module.exports.run = async (client, message, args) => {
   const embed1 = new Discord.RichEmbed()
     .setColor('#42f5ce')
