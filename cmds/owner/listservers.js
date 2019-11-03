@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args) => {
 
   const positionInArray = page - 1
   const offset = 10 * positionInArray
-  const list = guilds.map(g => `${g.name} (${g.id})`).slice(0 + offset, offset + 10).join('\n')
+  const list = guilds.map(g => `Guild Name: \n ${g.name} \n Guild ID: \n ${g.id} \n Guild Membercount: ${g.memberCount} \n Guild OwnerID: ${g.ownerID}`).slice(0 + offset, offset + 10).join('\n')
 
   if (offset > totalGuildCount) return message.reply('No such page.')
   message.channel.send({
