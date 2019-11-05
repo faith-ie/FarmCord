@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 module.exports.run = async (client, message, args) => {
-  const embed1 = new Discord.RichEmbed()
+  const embed1 = new Discord.MessageEmbed()
     .setColor('#42f5ce')
     .setAuthor('Sent by ' + message.author.tag + ' from ' + message.guild.name, message.author.avatarURL)
     .setDescription(args.slice().join(' '))
