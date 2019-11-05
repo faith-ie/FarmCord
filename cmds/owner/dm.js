@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const { owner } = require('../../config.json')
 module.exports.run = async (client, message, args) => {
   if (!owner.includes(message.author.id)) return
-  const embed1 = new Discord.RichEmbed()
+  const embed1 = new Discord.MessageEmbed()
     .setColor('#42f5ce')
     .setAuthor('Owner of ' + client.user.tag, client.user.avatarURL)
     .setDescription(args.slice(1).join(' '))
