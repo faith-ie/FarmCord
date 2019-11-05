@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 module.exports.run = async (client, message, args) => {
-  const embed1 = new Discord.RichEmbed()
+  const embed1 = new Discord.MessageEmbed()
     .setTitle('FarmCord Help Menu')
     .setColor('#42f5ce')
     .addField('=>help', 'Help menu, usage is =>help or =>h')
