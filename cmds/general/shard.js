@@ -1,8 +1,11 @@
 module.exports.run = async (client, message, args) => {
-    let output = ['SHARD | STATUS | GUILDS | PING', '__________________']
-const shards = client.ws.shards.map(s => s.status);
-shards.forEach((alive) => alive === 0 ? '💚' : '💔');
-shards.map(sh => `${sh.id}` === currentShard ? `>>>${sh.id}`.length : sh.id.toString().length, client.ws.shard.status === 5 )
+ let shardsContent = [];
+client.ws.shards.forEach(shard => {
+    shardsContent.push(`${shard.status == 0 ? '💚' : '💔' } - ${shard.id} - ${shard.ping}ms - ${client.guilds.size} guilds`)
+});
+message.channel.send(shardsContent.join('\n'));
+
+
 }
 module.exports.info = {
     name: 'shards',
