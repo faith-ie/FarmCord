@@ -1,6 +1,5 @@
-const process = require('process')
 const mem = Math.ceil(process.memoryUsage().rss)
-const uptime = process.uptime()
+const uptime = Math.ceil(process.uptime())
 const Discord = require('discord.js')
 module.exports.run = async (client, message, args) => {
   const embed1 = new Discord.MessageEmbed()
@@ -8,7 +7,7 @@ module.exports.run = async (client, message, args) => {
     .setColor('#42f5ce')
     .addField(`I am using ${mem / 1024 / 1024}MB`, 'Wow! Look at that memory usage!')
     .addField(`and I have been online for ${uptime} minutes`, 'Look at that uptime!')
-    .setFooter(`${message.author.name}`)
+    .setFooter(`${message.author}`)
   message.channel.send(embed1)
 }
 module.exports.info = {
