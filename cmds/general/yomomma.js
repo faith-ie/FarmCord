@@ -1,12 +1,13 @@
 const Discord = require('discord.js')
-const mongodb = require('mongodb')
+const ym = require('yo-mamma').default
+const insult = ym()
 module.exports.run = async (client, message, args) => {
-  const Acc = await mongodb.findOne
   const embed1 = new Discord.MessageEmbed()
-    .setTitle('Welcome to FarmCord!')
     .setColor('#42f5ce')
-    .setDescription('Would you l')
+    .setDescription(insult + ' 🤣')
+  message.channel.send(embed1)
 }
 module.exports.info = {
-  name: 'start'
+  name: 'yomomma',
+  aliases: ['ym']
 }

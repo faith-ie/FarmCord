@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args) => {
     .setColor('#42f5ce')
     .addField(`I am using ${mem / 1024 / 1024}MB`, 'Wow! Look at that memory usage!')
     .addField(`and I have been online for ${uptime} minutes`, 'Look at that uptime!')
-    .setFooter(`${message.author}`)
+    .setFooter(`${message.author.name}`)
   message.channel.send(embed1)
 }
 module.exports.info = {
