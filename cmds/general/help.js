@@ -3,9 +3,9 @@ module.exports.run = async (client, message, args) => {
   const embed1 = new Discord.MessageEmbed()
     .setTitle('FarmCord Help Menu')
     .setColor('#42f5ce')
-    .addField('=>help', 'Help menu, usage is =>help or =>h')
-    .addField('=>plant', 'Plant a seed, usage is =>plant or =>pl')
-    .addField('=>shop', 'show the store, usage is =>shop or =>sh')
+    .addField('Core Features 👨‍🌾', '=>help, =>plant, =>shop')
+    .addField('Gambling Features 🎰', '=>rps')
+    .addField('Misc Features ⚙️', '=>yomomma, =>catfact')
 
   message.author.send(embed1)
 }
