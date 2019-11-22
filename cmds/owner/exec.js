@@ -8,7 +8,7 @@ module.exports.run = async function (client, message, args) {
   if (!owner.includes(message.author.id)) return
 
   // Run the shell command.
-  const result = await new Promise((rs, rj) => processes.exec(args.join(' '), (err, stdout, stderr) => err ? rj(err) : rs({ out: stdout.toString().trim(), err: stderr.toString().trim() })))
+  const result = await new Promise((rs, rj) => processes.exec(args.join(/ +/g), (err, stdout, stderr) => err ? rj(err) : rs({ out: stdout.toString().trim(), err: stderr.toString().trim() })))
 
   // Format the output.
   let output = ''
