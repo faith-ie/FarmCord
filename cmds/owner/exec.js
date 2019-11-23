@@ -3,7 +3,7 @@ var processes = require('child_process')
 const { owner } = require('../../config.json')
 const pastebinClient = new Pastebin({ api_dev_key: '', api_user_name: '', api_user_password: '' })
 
-module.exports.run = async function (client, message, args) {
+module.exports.run = async (client, message, args) => {
   // Check if the user has permission to run this command.
   if (!owner.includes(message.author.id)) return
 
