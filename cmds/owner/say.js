@@ -4,11 +4,10 @@ module.exports.run = async (client, message, args) => {
   if (!owner.includes(message.author.id)) return
   const embed1 = new Discord.MessageEmbed()
     .setColor('#42f5ce')
-    .setAuthor('Owner of ' + client.user.tag, client.user.displayAvatarURL())
-    .setDescription(args.slice(1).join(' '))
-    .setFooter('You can reply to this message with =>contact')
-  client.users.get(args[0]).send(embed1)
+    .setDescription(args.slice(0).join(' ')
+    )
+  message.channel.send(embed1)
 }
 module.exports.info = {
-  name: 'dm'
+  name: 'say'
 }

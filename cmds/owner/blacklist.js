@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args) => {
         username: user.tag,
         userID: user.id,
         BannedDate: message.CreatedAt,
-        Reason: args.slice(message.mentions.users.size).join(/ +/g)
+        Reason: args.slice(message.mentions.users.size).join(' ')
       })
 
       const embed1 = new Discord.RichEmbed()
