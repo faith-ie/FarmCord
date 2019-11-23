@@ -8,8 +8,6 @@ module.exports = client => {
     if (!message.content.startsWith(prefix)) return
 
     if (message.author.bot) return
-    const messageArray = message.content.split(' ')
-    const cmd = messageArray[0]
     const args = message.content.slice(prefix.length).split(/ +/g)
     const command = args.shift().toLowerCase()
 
