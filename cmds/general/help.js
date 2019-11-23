@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args) => {
     .addField('Gambling Features 🎰', '=>rps')
     .addField('Misc Features ⚙️', '=>yomomma, =>catfact')
 
-  message.author.send(embed1)
+  message.channel.send(embed1)
 }
 module.exports.info = {
   name: 'help',

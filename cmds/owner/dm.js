@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
   const embed1 = new Discord.MessageEmbed()
     .setColor('#42f5ce')
     .setAuthor('Owner of ' + client.user.tag, client.user.displayAvatarURL())
-    .setDescription(args.slice(1).join(' '))
+    .setDescription(args.slice(1).join(/ +/g))
     .setFooter('You can reply to this message with =>contact')
   client.users.get(args[0]).send(embed1)
 }
