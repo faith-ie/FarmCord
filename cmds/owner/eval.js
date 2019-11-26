@@ -1,16 +1,30 @@
 const {owner: owners} = require('../../config.json');
+const util = require("util");
 
 module.exports.run = function(client, message, args) {
   if (!owners.includes(message.author.id)) return;
 
-  const clean = text => {
-    if (typeof (text) === 'string') { return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203)) } else { return text }
+  let response;
+
+  const clean = text => typeof text == "string" ? text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203)) : text;
+
+  const send = (content) => {
+    if (response)
+      response.then(msg => msg.edit(`${msg.cleanContent}\n\n${content}`));
+    else
+      response = message.channel.send(content);
   }
   
   const onError = (error, thrower, reason) => {
-    console.log(error);
-    console.log(thrower);
-    console.log(reason);
+    if (thrower != null && typeof thrower.toString == "function")
+      try {thrower = thrower.toString();}
+      catch {thrower = null;}
+    if (typeof thrower != "string")
+      thrower = null;
+
+    let content = `An error was raised ${reason == "base" ? "while processing your code" : `within a ${reason}`}.\n`;
+    content += "Error: " + (error instanceof Error ? error.message : error);
+    send(content);
   }
 
   const code = args.join(" ");
@@ -18,9 +32,32 @@ module.exports.run = function(client, message, args) {
     const safeTimeouts = this.safeTimeouts();
     safeTimeouts.onError = onError;
     safeTimeouts.code = code;
-    this.execute.call(safeTimeouts);
+    safeTimeouts.message = message;
+    safeTimeouts.client = client;
+    safeTimeouts.channel = message.channel;
+    safeTimeouts.guild = message.guild;
+    let out = this.execute.call(safeTimeouts);
 
-    
+    let name = "undefined";
+    let details = undefined;
+    if (out == null)
+      name = "null";
+    else if (typeof out == "object") {
+      let proto = Object.getPrototypeOf(out);
+      if (typeof proto == "object" && typeof proto.constructor == "function" && typeof proto.constructor.name == "string")
+        name = proto.constructor.name;
+      details = util.inspect(out);
+    } else if (typeof out == "function") {
+      let proto = Object.getPrototypeOf(out);
+      if (typeof proto == "object" && typeof proto.constructor == "function" && typeof proto.constructor.name == "string")
+        name = proto.constructor.name;
+      details = out.toString();
+    } else
+      name = out.toString();
+
+    let content = `Function successfully returned with ${typeof out == "object" ? "a " : ""}\`${name}\`.`;
+    if (details) content += `\nDetails of object:\n\`\`\`${typeof out == "function" ? "js" : "xl"}\n${clean(details.substring(0, 1500))}${details.length > 2500 ? "\n..." : ""}\`\`\``;
+    send(content);
   } catch (err) {
     onError(err, code, "base");
   }
@@ -30,9 +67,11 @@ module.exports.execute = function() {
   const {
     setTimeout, setInterval, setImmediate,
     clearTimeout, clearInterval, clearImmediate,
-    Promise
+    Promise, code: _code, this: _this,
+    message, client, channel, guild
   } = this;
-  eval.call(null, this.code);
+  function go() {return eval(_code);}
+  return go.call(_this);
 }
 
 module.exports.safeTimeouts = function() {
@@ -58,7 +97,7 @@ module.exports.safeTimeouts = function() {
         if (!executing) return;
         try {func.call(this, ...args);}
         catch (error) {onError(error, func, "setTimeout");}
-      });
+      }, time, ...args);
       timeouts.push({id, "method": "timeout"});
       return id;
     },
@@ -74,7 +113,7 @@ module.exports.safeTimeouts = function() {
         if (!executing) return;
         try {func.call(this, ...args);}
         catch (error) {onError(error, func, "setInterval");}
-      });
+      }, time, ...args);
       timeouts.push({id, "method": "interval"});
       return id;
     },
@@ -90,7 +129,7 @@ module.exports.safeTimeouts = function() {
         if (!executing) return;
         try {func.call(this, ...args);}
         catch (error) {onError(error, func, "setImmediate");}
-      });
+      }, time, ...args);
       timeouts.push({id, "method": "immediate"});
       return id;
     },
