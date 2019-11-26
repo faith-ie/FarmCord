@@ -1,5 +1,5 @@
-const Discord = require('discord.js');
-const ym = require('yo-mamma').default;
+const Discord = require('discord.js')
+const ym = require('yo-mamma').default
 
 module.exports.run = async (client, message, args) => {
   const embed1 = new Discord.MessageEmbed()
