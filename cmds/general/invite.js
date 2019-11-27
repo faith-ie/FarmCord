@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
   const embed1 = new Discord.MessageEmbed()
     .setTitle('Invite me!')
     .setColor('#42f5ce')

@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
   const embed1 = new Discord.MessageEmbed()
     .setTitle('FarmCord Shop')
     .setDescription('```Welcome to the store!\n\nWheat - $??\nMelon Seeds - $??\nSugarcane - $??\nWatermellon Seeds - $??\nCarrots - $??\nPotatoes - $??\nTomatoes - $??\nOrange Seeds - $??\nBanana Seeds - $??\nMango Seeds - $??```')

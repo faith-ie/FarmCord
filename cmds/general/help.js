@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
   const embed1 = new Discord.MessageEmbed()
     .setTitle('FarmCord Help Menu')
     .setColor('#42f5ce')

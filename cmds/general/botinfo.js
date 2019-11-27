@@ -1,7 +1,7 @@
 const mem = Math.ceil(process.memoryUsage().rss)
 const uptime = Math.ceil(process.uptime())
 const Discord = require('discord.js')
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
   const embed1 = new Discord.MessageEmbed()
     .setTitle('FarmCord Info')
     .setColor('#42f5ce')

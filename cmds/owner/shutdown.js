@@ -1,5 +1,5 @@
 const { owner } = require('../../config.json')
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
   if (owner.includes(message.author.id)) { message.channel.send('Goodbye! 👋').then(process.exit) }
 }
 

@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const cf = require('cat-facts')
 const cfr = cf.random()
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
   const embed1 = new Discord.MessageEmbed()
     .setColor('#42f5ce')
     .setDescription(cfr + ' 🐈')

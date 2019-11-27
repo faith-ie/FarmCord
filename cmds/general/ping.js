@@ -1,4 +1,4 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
   const ping = Math.ceil(client.ws.ping)
   message.channel.send('🏓 ' + `${ping}` + 'ms')
 }
