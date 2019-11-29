@@ -1,5 +1,10 @@
 {
     "prefix": "=>",
-    "token": "Token Here",
-    "owner": [ "Id here if you want to add more than one owner, add it like this", "owner 2 id"]
+    "token": "Discord Bot's Token Here",
+    "owner": [
+        "Owner's Discord ID",
+        "Co-Owner #1's Discord ID",
+        "Co-Owner #2's Discord ID",
+        "Etcetera..."
+    ]
 }
