@@ -14,4 +14,3 @@ client.aliases = new discord.Collection()
 require('./libs/events.js')(client)
 require('./libs/extendedFunctions.js')(client)
 client.login(config.token)
-// TODO: Remind dv she is literally adorable
