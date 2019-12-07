@@ -6,6 +6,10 @@ module.exports = client => {
     if (message.author.bot) return
     if (message.channel.type === 'dm') return
     if (!message.content.startsWith(prefix)) return
+    console.log(`User: ${message.author.username} || ${message.author.id} ||`)
+    console.log(`Server: ${message.guild.name} || ${message.guild.id} ||`)
+    console.log(`Channel: ${message.channel.name} || ${message.channel.id} ||`)
+    console.log(`Message: ${message.content}`)
 
     const args = message.content.slice(prefix.length).split(/ +/g)
     const command = args.shift().toLowerCase()
