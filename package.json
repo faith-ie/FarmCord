@@ -6,14 +6,14 @@
   "dependencies": {
     "cat-facts": "^1.0.2",
     "cryptiles": "^4.1.3",
-    "discord.js": "^12.0.0-dev",
+    "discord.js": "github:discordjs/discord.js",
     "hoek": "^6.1.3",
     "ioredis": "^4.14.1",
     "jimp": "^0.8.5",
     "mongodb": "^3.3.4",
     "mongoose": "^5.7.12",
     "pastebin-js": "^1.0.3",
-    "pm2": "^4.1.2",
+    "pm2": "^4.2.0",
     "semver": "^6.3.0",
     "yo-mamma": "^1.3.0"
   },
