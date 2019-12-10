@@ -12,8 +12,8 @@ module.exports.run = async (client, message, args) => {
 
   // Format the output.
   let output = ''
-  if (result.out != '') output += 'Standard Output:\n' + result.out
-  if (result.err != '') output += (output != '' ? '\n\n' : '') + 'Standard Error:\n' + result.err
+  if (result.out != '') output += '\n' + result.out
+  if (result.err != '') output += (output != '' ? '\n\n' : '') + '\n' + result.err
 
   // Check if we can send on Discord.
   if (output.length < 2000) {
