@@ -4,7 +4,7 @@ const DiscordUserSchema = mongoose.Schema({
   votedCounter: Number,
   cash: Number,
   marriedTo: String,
-  Inventory: Number,
+  Inventory: [String],
   creationDate: String
 })
 module.exports = mongoose.model('DiscordUser', DiscordUserSchema)
