@@ -8,7 +8,7 @@ module.exports = client => {
     // for each internal folder
     files.forEach(folder => {
       // read the folder to get all commands inside it
-      fs.readdir(`${__dirname}/../cmds/${folder}/`, (err, command) => {
+      fs.readdir(`${__dirname}/../cmds/${folder}/`, (_err, command) => {
         const jsfile = command.filter(f => f.split('.').pop() === 'js')
         if (jsfile.length <= 0) {
           console.log('Command not found.')
