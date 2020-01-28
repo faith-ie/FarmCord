@@ -12,7 +12,7 @@ module.exports = client => {
 
       // Check to make sure user doesnt already exist
       const entry = await client.database.collection('DiscordUser').findOne({ uid: uid })
-      if (entry === null) return Promise.reject('User exist in database.')
+      if (entry === null) return Promise.reject('User exists in database.')
 
       return client.database.collection('DiscordUser').insert({
         uid: uid,
@@ -34,7 +34,7 @@ module.exports = client => {
     setAnimalName: async (uid, name) => {
       // Check to make sure user doesnt already exist
       const entry = await client.database.collection('DiscordUser').findOne({ uid: uid })
-      if (entry === null) return Promise.reject('User exist in database.')
+      if (entry === null) return Promise.reject('User exists in database.')
 
       return client.database.collection('DiscordUser').updateOne({ uid: uid }, {
         $set: {
