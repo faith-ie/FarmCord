@@ -1,5 +1,7 @@
 'use strict'
+require("dotenv").config()
 exports.__esModule = true
+
 if (semver.satisfies(process.version, '=>12.11.1')) { throw new Error('You need node version 12.11.1 or higher') }
 
 var semver = require('semver')
