@@ -1,4 +1,4 @@
-const { owner } = require('../../config.json')
+/* const { owner } = require('../../config.json')
 module.exports.run = async (client, message, args) => {
   if (!owner.includes(message.author.id)) return
   const { guilds } = client
@@ -23,3 +23,4 @@ module.exports.run = async (client, message, args) => {
 module.exports.info = {
   name: 'listservers'
 }
+*/

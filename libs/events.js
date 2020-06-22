@@ -1,14 +1,12 @@
-const { prefix } = require('../config.json')
 const date = new Date()
 
 module.exports = client => {
-  client.on('message', async message => {
+  client.on('messageCreate', async (message) => {
     if (message.author.bot) return
     if (message.channel.type === 'dm') return
     if (!message.content.startsWith(prefix)) return
-    console.log(`User: ${message.author.username} || ${message.author.id} ||`)
-    console.log(`Server: ${message.guild.name} || ${message.guild.id} ||`)
-    console.log(`Channel: ${message.channel.name} || ${message.channel.id} ||`)
+    console.log(`Author: ${message.author} || ${message.author.username}`)
+    console.log(`Channel: ${message.channel.id} || ${message.channel.name}`)
     console.log(`Message: ${message.content}`)
 
     const args = message.content.slice(prefix.length).split(/ +/g)
@@ -30,7 +28,7 @@ module.exports = client => {
     client.user.setActivity(`${prefix}help`)
   })
 
-  client.on('guildCreate', async guild => {
+  client.on('guildCreate', async (guild) => {
     const { id, name, memberCount } = guild
     console.log(`I have joined ${name} with the server id of ${id} that has ${memberCount} members!`)
   })

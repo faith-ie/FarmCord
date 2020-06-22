@@ -1,4 +1,4 @@
-const { owner: owners } = require('../../config.json')
+/* const { owner: owners } = require('../../config.json')
 const util = require('util')
 
 module.exports.run = async (client, message, args) => {
@@ -136,3 +136,4 @@ module.exports.info = {
   name: 'eval',
   aliases: ['e', 'ev']
 }
+*/

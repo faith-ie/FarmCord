@@ -1,4 +1,4 @@
-const { owner } = require('../../config.json')
+/** const { owner } = require('../../config.json')
 module.exports.run = async (client, message, args) => {
   if (!owner.includes(message.author.id)) return
   if (args[0] === 'online') client.user.setStatus('online').then(message.channel.send('👌'))
@@ -9,3 +9,4 @@ module.exports.run = async (client, message, args) => {
 module.exports.info = {
   name: 'setstatus'
 }
+**/

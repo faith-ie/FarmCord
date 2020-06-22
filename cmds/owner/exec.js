@@ -1,4 +1,4 @@
-var Pastebin = require('pastebin-js')
+/* var Pastebin = require('pastebin-js')
 var processes = require('child_process')
 const { owner } = require('../../config.json')
 const pastebinClient = new Pastebin({ api_dev_key: '', api_user_name: '', api_user_password: '' })
@@ -30,3 +30,4 @@ module.exports.info = {
   name: 'exec',
   aliases: ['ex', 'shell']
 }
+*/

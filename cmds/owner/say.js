@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+/* const Discord = require('discord.js')
 const { owner } = require('../../config.json')
 module.exports.run = async (client, message, args) => {
   if (!owner.includes(message.author.id)) return
@@ -11,3 +11,4 @@ module.exports.run = async (client, message, args) => {
 module.exports.info = {
   name: 'say'
 }
+*/

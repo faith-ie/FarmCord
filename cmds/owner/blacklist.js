@@ -1,7 +1,6 @@
 const blacklist = require('../../Accounts/blacklist.js')
 const account = require('../../Accounts/DiscordUser.js')
-const { owner } = require('../../config.json')
-const Discord = require('discord.js')
+// const Discord = require('discord.js')
 module.exports.run = async (client, message, args) => {
   // check if user is owner
   if (!owner.includes(message.author.id)) return
@@ -24,15 +23,15 @@ module.exports.run = async (client, message, args) => {
         Reason: args.slice(message.mentions.users.size).join(' ')
       })
 
-      const embed1 = new Discord.RichEmbed()
-        .setTitle('Farmcord')
-        .setColor('42f5ce')
-        .setTimestamp()
-        .setDescription('You have been blacklisted from FarmCord.')
+      // const embed1 = new Discord.RichEmbed()
+      // .setTitle('Farmcord')
+      // .setColor('42f5ce')
+      // .setTimestamp()
+      // .setDescription('You have been blacklisted from FarmCord.')
 
-      user.dmChannel.send(embed1)
-      newBL.save()
-      message.channel.send('User(s) successfully blacklisted!')
+      // user.dmChannel.send(embed1)
+      // newBL.save()
+      // message.channel.send('User(s) successfully blacklisted!')
     })
   }
 }
