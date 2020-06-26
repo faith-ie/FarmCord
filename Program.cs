@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
+using System.Transactions;
 using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 
 namespace FarmCord
@@ -26,6 +29,22 @@ namespace FarmCord
         {
             Console.WriteLine(message.ToString());
             return Task.CompletedTask;
+        }
+        public class CommandHandler
+        {
+            private readonly DiscordSocketClient _client;
+            private readonly CommandService _commands;
+
+            public CommandHandler(DiscordSocketClient client, CommandService commands)
+            {
+                _commands = commands;
+                _client = client;
+            }
+            public async Task InstallCommandsAsync()
+            {
+                _client.MessageReceived += HandleCommandAsync;
+                await _commands.AddModuleAsync(assembly: Assembly.GetEntryAssembly(), services: null);
+            }
         }
     }
 }
