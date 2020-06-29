@@ -20,7 +20,7 @@ namespace FarmCord
                 LogLevel = LogSeverity.Info
             });
             _client.Log += Log;
-            await _client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("Discord Token"));
+            await _client.LoginAsync(TokenType.Bot, "Discord Token");
             await _client.StartAsync();
             await Task.Delay(-1);
         }
