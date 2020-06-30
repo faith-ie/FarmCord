@@ -25,13 +25,15 @@ namespace FarmCord
             _client.Log += Log;
             await _client.LoginAsync(TokenType.Bot, "Discord Token");
             await _client.StartAsync();
-            await Task.Delay(-1);
             _commands = new CommandService();
             _services = new ServiceCollection()
         .AddSingleton(_client)
         .AddSingleton(_commands)
         .AddSingleton<CommandHandler>()
         .BuildServiceProvider();
+            await _services.GetRequiredService<CommandHandler>().InstallCommandsAsync();
+
+            await Task.Delay(-1);
         }
         private Task Log(LogMessage message)
         {
