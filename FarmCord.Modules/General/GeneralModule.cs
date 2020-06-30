@@ -1,8 +1,7 @@
 ﻿using Discord.Commands;
-using System;
 using System.Threading.Tasks;
 
-namespace FarmCord.Modules
+namespace FarmCord.General.Module
 {
 	public class GeneralModule : ModuleBase
 	{	
@@ -10,7 +9,6 @@ namespace FarmCord.Modules
 		[Summary("Lists the bots commands.")]
 		public async Task HelpAsync([Remainder] [Summary("Lists the bots commands.")] string help = "")
 		{
-			Console.WriteLine('h');
 			await ReplyAsync("FarmCord Help\nTest");
 		}
 	}
