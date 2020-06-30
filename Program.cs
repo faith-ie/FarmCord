@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace FarmCord
 {
