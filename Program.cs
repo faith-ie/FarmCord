@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
@@ -10,6 +11,8 @@ namespace FarmCord
     public class Program
     {
         private DiscordSocketClient _client;
+        private IServiceProvider _services;
+        private CommandService _commands;
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()
@@ -23,6 +26,12 @@ namespace FarmCord
             await _client.LoginAsync(TokenType.Bot, "Discord Token");
             await _client.StartAsync();
             await Task.Delay(-1);
+            _commands = new CommandService();
+            _services = new ServiceCollection()
+        .AddSingleton(_client)
+        .AddSingleton(_commands)
+        .AddSingleton<CommandHandler>()
+        .BuildServiceProvider();
         }
         private Task Log(LogMessage message)
         {
