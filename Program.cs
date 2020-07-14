@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-
+using MongoDB.Driver;
 namespace FarmCord
 {
     public class Program
@@ -15,6 +15,13 @@ namespace FarmCord
         private CommandService _commands;
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
+        public async Task MongoService()
+
+        {
+            var client = new MongoClient("mongodb://host:27017");
+            var db = client.GetDatabase("DiscordUser");
+
+        }
         public async Task MainAsync()
 
         {
