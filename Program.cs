@@ -2,10 +2,10 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using MongoDB.Driver;
 namespace FarmCord
 {
     public class Program
