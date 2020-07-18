@@ -28,9 +28,18 @@ namespace FarmCord.Owner.Module
                 var collection = db.GetCollection<BsonDocument>("ServerBlacklists");
                 var ServerBlackListDoc = new BsonDocument
                 {
+                    {"name", "MongoDB" },
+                    {"type", "Database" },
+                    { "count", 1 },
+                    { "info", new BsonDocument
+                    {
+                        {"x", 203 },
+                        {"y", 102}
+                    } }
 
                 };
-
+                await collection.InsertOneAsync(ServerBlackListDoc);
+                Console.WriteLine("test");
 
             }
             [Command("userblacklist")]
@@ -41,46 +50,46 @@ namespace FarmCord.Owner.Module
 
             }
         }
-            [Command("dm")]
-            [Summary("DM's a person")]
-            public async Task DmAsync(string user, [Remainder] string dm = "")
-            {
-                IUser User = await Context.Client.GetUserAsync(ulong.Parse(user));
-                IDMChannel Dm = await User.GetOrCreateDMChannelAsync();
-                ISelfUser client = Context.Client.CurrentUser;
-                var embed = new EmbedBuilder();
-                embed.WithAuthor($"Owner of {client}");
-                embed.WithThumbnailUrl(client.GetAvatarUrl());
-                embed.WithColor(Color.DarkTeal);
-                embed.WithDescription(dm);
-                embed.WithFooter("You can reply to this message with =>contact");
-                await Dm.SendMessageAsync(embed: embed.Build());
-            }
-            [Command("listservers")]
-            [Summary("list all the servers the bot is in")]
-            public async Task ListServersAsync([Remainder][Summary("list all the servers the bot is in")] string listservers = "")
-            {
-                await ReplyAsync("many servers");
-            }
-            [Command("setgame")]
-            [Summary("sets the bot's game")]
-            public async Task SetGameAsync([Remainder][Summary("Sets the bots game")] string setgame = "")
-            {
-                await ReplyAsync("gaming");
-            }
-            [Command("setstatus")]
-            [Summary("Sets the bots status")]
-            public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
-            {
-                await ReplyAsync("0215028");
-            }
-            [Command("shutdown")]
-            [Summary("Shuts down the bot")]
-            [Alias("die", "kill")]
-            public async Task ShutDownAsync([Remainder][Summary("Shuts down the bot")] string shutdown = "")
-            {
-                await ReplyAsync("Shutting Down");
-                System.Environment.Exit(0);
-            }
+        [Command("dm")]
+        [Summary("DM's a person")]
+        public async Task DmAsync(string user, [Remainder] string dm = "")
+        {
+            IUser User = await Context.Client.GetUserAsync(ulong.Parse(user));
+            IDMChannel Dm = await User.GetOrCreateDMChannelAsync();
+            ISelfUser client = Context.Client.CurrentUser;
+            var embed = new EmbedBuilder();
+            embed.WithAuthor($"Owner of {client}");
+            embed.WithThumbnailUrl(client.GetAvatarUrl());
+            embed.WithColor(Color.DarkTeal);
+            embed.WithDescription(dm);
+            embed.WithFooter("You can reply to this message with =>contact");
+            await Dm.SendMessageAsync(embed: embed.Build());
+        }
+        [Command("listservers")]
+        [Summary("list all the servers the bot is in")]
+        public async Task ListServersAsync([Remainder][Summary("list all the servers the bot is in")] string listservers = "")
+        {
+            await ReplyAsync("many servers");
+        }
+        [Command("setgame")]
+        [Summary("sets the bot's game")]
+        public async Task SetGameAsync([Remainder][Summary("Sets the bots game")] string setgame = "")
+        {
+            await ReplyAsync("gaming");
+        }
+        [Command("setstatus")]
+        [Summary("Sets the bots status")]
+        public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
+        {
+            await ReplyAsync("0215028");
+        }
+        [Command("shutdown")]
+        [Summary("Shuts down the bot")]
+        [Alias("die", "kill")]
+        public async Task ShutDownAsync([Remainder][Summary("Shuts down the bot")] string shutdown = "")
+        {
+            await ReplyAsync("Shutting Down");
+            System.Environment.Exit(0);
         }
     }
+}
