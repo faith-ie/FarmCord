@@ -3,9 +3,12 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+
 namespace FarmCord
 {
     public class Program
@@ -13,6 +16,8 @@ namespace FarmCord
         private DiscordSocketClient _client;
         private IServiceProvider _services;
         private CommandService _commands;
+        public static Config Config = null;
+
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MongoService()
@@ -25,12 +30,14 @@ namespace FarmCord
         public async Task MainAsync()
 
         {
+            Config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(@"E:\Programming\c#\FarmCord\FarmCord\config.json"));
+
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
                 LogLevel = LogSeverity.Info
             });
             _client.Log += Log;
-            await _client.LoginAsync(TokenType.Bot, "Bot Token");
+            await _client.LoginAsync(TokenType.Bot, Config.token);
             await _client.StartAsync();
             _commands = new CommandService();
             _services = new ServiceCollection()
@@ -67,7 +74,7 @@ namespace FarmCord
                 var message = messageParam as SocketUserMessage;
                 if (message == null) return;
                 int argPos = 0;
-                if (!(message.HasStringPrefix("=>", ref argPos) ||
+                if (!(message.HasStringPrefix(Config.prefix, ref argPos) ||
                      message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
                 if (message.Author.IsBot) return;
                 var context = new SocketCommandContext(_client, message);
