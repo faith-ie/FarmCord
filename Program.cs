@@ -23,7 +23,7 @@ namespace FarmCord
         public async Task MongoService()
 
         {
-            var client = new MongoClient("mongodb://host:27017");
+            var client = new MongoClient("mongodb://localhost:27017");
             var db = client.GetDatabase("DiscordUser");
 
         }

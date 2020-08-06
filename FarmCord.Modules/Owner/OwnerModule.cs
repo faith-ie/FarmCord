@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using Discord.Rest;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -11,46 +12,63 @@ namespace FarmCord.Owner.Module
     public class OwnerModule : ModuleBase
     {
 
-            [Command("serverblacklist")]
-            [Summary("Blacklists servers from using the bot")]
-            [Alias("sbl")]
-            public async Task ServerBlackListAsync(ulong serverid)
-            {
-                var server = await Context.Client.GetGuildAsync(serverid); 
-                var client = new MongoClient("mongodb://localhost:27017");
-                var bandate = DateTime.UtcNow;
-                var db = client.GetDatabase("DiscordUser");
-                var collection = db.GetCollection<BsonDocument>("ServerBlacklists");
-                var ServerBlackListDoc = new BsonDocument
+        [Command("serverblacklist")]
+        [Summary("Blacklists servers from using the bot")]
+        [Alias("sbl")]
+        public async Task ServerBlackListAsync(ulong serverid, string reason = "")
+        {
+            var server = await Context.Client.GetGuildAsync(serverid);
+            var GuildName = server.Name;
+            var GuildId = server.Id;
+            var client = new MongoClient("mongodb://localhost:27017");
+            var bandate = DateTime.UtcNow;
+            var db = client.GetDatabase("DiscordUser");
+            var collection = db.GetCollection<BsonDocument>("ServerBlackLists");
+            var ServerBlackListDoc = new BsonDocument
                 {
-                    {"name", "MongoDB" },
-                    {"type", "Database" },
-                    { "count", 1 },
-                    { "info", new BsonDocument
-                    {
-                        {"x", 203 },
-                        {"y", 102}
-                    } }
-
+                    {"name", $"{GuildName}" },
+                    {"GuildId", $"{GuildId}" },
+                    { "BanDate", bandate },
+                    { "Reason", reason
+                }
                 };
-                try
-                {
-                    await collection.InsertOneAsync(ServerBlackListDoc);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-
-            }
-            [Command("userblacklist")]
-            [Summary("Blacklists users from using the bot")]
-            [Alias("ubl")]
-            public async Task UserBlackListAsync()
+            try
             {
-
+                await collection.InsertOneAsync(ServerBlackListDoc);
             }
-        
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+        }
+        [Command("userblacklist")]
+        [Summary("Blacklists users from using the bot")]
+        [Alias("ubl")]
+        public async Task UserBlackListAsync(ulong userid, string reason = "")
+        {
+            var user = Context.Client.GetUserAsync(userid);
+            var userId = user.Id;
+            var bandate = DateTime.UtcNow;
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("DiscordUser");
+            var collection = db.GetCollection<BsonDocument>("UserBlackLists");
+            var UserBlackListDoc = new BsonDocument
+            {
+                {"userID", userId },
+                {"BanDate", bandate },
+                {"Reason", reason }
+            };
+            try
+            {
+                await collection.InsertOneAsync(UserBlackListDoc);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
         [Command("dm")]
         [Summary("DM's a person")]
         public async Task DmAsync(string user, [Remainder] string dm = "")
