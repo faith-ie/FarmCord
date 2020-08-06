@@ -11,18 +11,13 @@ namespace FarmCord.Owner.Module
     public class OwnerModule : ModuleBase
     {
 
-        [Group("BlackLists")]
-        public class BlackListModule : ModuleBase
-        {
-
             [Command("serverblacklist")]
             [Summary("Blacklists servers from using the bot")]
             [Alias("sbl")]
             public async Task ServerBlackListAsync(ulong serverid)
             {
-                var server = await Context.Client.GetGuildAsync(serverid);
-                ulong ownerid = server.OwnerId;
-                var client = new MongoClient();
+                var server = await Context.Client.GetGuildAsync(serverid); 
+                var client = new MongoClient("mongodb://localhost:27017");
                 var bandate = DateTime.UtcNow;
                 var db = client.GetDatabase("DiscordUser");
                 var collection = db.GetCollection<BsonDocument>("ServerBlacklists");
@@ -38,8 +33,14 @@ namespace FarmCord.Owner.Module
                     } }
 
                 };
-                await collection.InsertOneAsync(ServerBlackListDoc);
-                Console.WriteLine("test");
+                try
+                {
+                    await collection.InsertOneAsync(ServerBlackListDoc);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
 
             }
             [Command("userblacklist")]
@@ -49,7 +50,7 @@ namespace FarmCord.Owner.Module
             {
 
             }
-        }
+        
         [Command("dm")]
         [Summary("DM's a person")]
         public async Task DmAsync(string user, [Remainder] string dm = "")
