@@ -1,4 +1,5 @@
 {
   "Token": "Discord Token",
-  "Prefix": "=>"
+  "Prefix": "=>",
+  "clientID": "630849680431120385"
 }

@@ -1,6 +1,5 @@
 ﻿using Discord;
 using Discord.Commands;
-using Discord.Rest;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;

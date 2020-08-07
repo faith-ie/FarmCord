@@ -8,4 +8,8 @@
     {
         get; set;
     }
+    public string clientID
+    {
+        get; set;
+    }
 }

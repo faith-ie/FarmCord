@@ -1,5 +1,6 @@
 ﻿using Discord.Commands;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace FarmCord.General.Module
 {
@@ -22,13 +23,20 @@ namespace FarmCord.General.Module
         [Summary("invite the bot")]
         public async Task InviteAsync([Remainder][Summary("Invite the bot")] string invite = "")
         {
-            await ReplyAsync("invite me");
+            await ReplyAsync("Invite me! https://discordapp.com/oauth2/authorize?client_id=630849680431120385&permissions=67423296&scope=bot");
         }
         [Command("ping")]
         [Summary("Bots connection to Discord")]
         public async Task PingAsync([Remainder][Summary("ping pong")] string ping = "")
         {
-            await ReplyAsync("PONG");
+            var sw = new Stopwatch();
+            sw.Start();
+            var message = await ReplyAsync("🏓");
+            sw.Stop();
+           await message.DeleteAsync();
+            await ReplyAsync($"{Context.User.ToString()}  🏓 {sw.ElapsedMilliseconds}ms");
+
+
         }
 
         [Command("shop")]
