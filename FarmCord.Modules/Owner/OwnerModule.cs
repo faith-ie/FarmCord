@@ -81,7 +81,14 @@ namespace FarmCord.Owner.Module
             embed.WithColor(Color.DarkTeal);
             embed.WithDescription(dm);
             embed.WithFooter("You can reply to this message with =>contact");
-            await Dm.SendMessageAsync(embed: embed.Build());
+            try
+            {
+                await Dm.SendMessageAsync(embed: embed.Build());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
         [Command("listservers")]
         [Summary("list all the servers the bot is in")]
@@ -109,5 +116,10 @@ namespace FarmCord.Owner.Module
             await ReplyAsync("Shutting Down");
             System.Environment.Exit(0);
         }
+        /**   [Command("rez")]
+           public async Task RezHornyAsync()
+           {
+               await ReplyAsync("<@241288855368499200> Horny");
+           }**/
     }
 }
