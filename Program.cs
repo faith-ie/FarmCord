@@ -8,7 +8,6 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-
 namespace FarmCord
 {
     public class Program
@@ -74,8 +73,7 @@ namespace FarmCord
                 var message = messageParam as SocketUserMessage;
                 if (message == null) return;
                 int argPos = 0;
-                if (!(message.HasStringPrefix(Config.prefix, ref argPos) ||
-                     message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
+                if (!(message.HasStringPrefix(Config.prefix, ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
                 if (message.Author.IsBot) return;
                 var context = new SocketCommandContext(_client, message);
                 var result = await _commands.ExecuteAsync(
