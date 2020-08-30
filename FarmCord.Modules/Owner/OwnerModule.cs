@@ -34,10 +34,16 @@ namespace FarmCord.Owner.Module
             try
             {
                 await collection.InsertOneAsync(ServerBlackListDoc);
+                var e = new EmbedBuilder();
+                e.WithDescription("👌");
+                e.WithColor(Color.DarkTeal);
+                await ReplyAsync(embed: e.Build());
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                Console.ReadLine();
+
             }
 
         }
@@ -60,11 +66,19 @@ namespace FarmCord.Owner.Module
             };
             try
             {
+                /* var find = await collection.FindAsync(UserBlackListDoc);
+                 find.Single(userId);*/
                 await collection.InsertOneAsync(UserBlackListDoc);
+                var e = new EmbedBuilder();
+                e.WithDescription("👌");
+                e.WithColor(Color.DarkTeal);
+                ReplyAsync(embed: e.Build());
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                Console.ReadLine();
             }
         }
 
@@ -88,13 +102,23 @@ namespace FarmCord.Owner.Module
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                Console.ReadLine();
+
             }
         }
         [Command("listservers")]
         [Summary("list all the servers the bot is in")]
         public async Task ListServersAsync([Remainder][Summary("list all the servers the bot is in")] string listservers = "")
         {
-            await ReplyAsync("many servers");
+            try
+            {
+                await ReplyAsync("many servers");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
         }
         [Command("setgame")]
         [Summary("sets the bot's game")]

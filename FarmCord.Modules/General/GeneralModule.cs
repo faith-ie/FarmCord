@@ -15,7 +15,7 @@ namespace FarmCord.General.Module
             var e = new EmbedBuilder();
             ISelfUser client = Context.Client.CurrentUser;
             e.WithTitle($"{client} Help");
-            e.WithDescription("`Help`\nLists the bot's commands\n`Invite`\nInvites the bot\n`Ping`\nBot's connection to Discord\nShop\nGet your seeds and items here!\nStart\nStart your farm!");
+            e.WithDescription("`Help`\nLists the bot's commands\n`Invite`\nInvites the bot\n`Ping`\nBot's connection to Discord\n`Shop`\nGet your seeds and items here!\n`Start`\nStart your farm!");
             e.WithColor(Color.DarkTeal);
             await ReplyAsync(embed: e.Build());
         }
@@ -65,7 +65,7 @@ namespace FarmCord.General.Module
         {
             await ReplyAsync("Would you like to start a farm? Yes or No");
         }
-       
+
     }
 }
 
