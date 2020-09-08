@@ -140,10 +140,10 @@ namespace FarmCord.Owner.Module
             await ReplyAsync("Shutting Down");
             System.Environment.Exit(0);
         }
-        /**   [Command("rez")]
-           public async Task RezHornyAsync()
-           {
-               await ReplyAsync("<@241288855368499200> Horny");
-           }**/
+        [Command("rez")]
+        public async Task RezHornyAsync()
+        {
+            await ReplyAsync("<@241288855368499200> Horny");
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace FarmCord.General.Module
             await message.DeleteAsync();
             var e = new EmbedBuilder();
             e.WithColor(Color.DarkTeal);
-            e.WithDescription($"{Context.User.ToString()}  🏓 {sw.ElapsedMilliseconds}ms");
+            e.WithDescription($"**{Context.User.ToString()}**  🏓 {sw.ElapsedMilliseconds}ms");
             await ReplyAsync(embed: e.Build());
 
 
@@ -67,5 +67,11 @@ namespace FarmCord.General.Module
         }
 
     }
+   /* [Command("botstats")]
+    public async Task StatsAsync([Remainder][Summary("botstats"] int BotVersion, string = "")
+    {
+        var e = new EmbedBuilder();
+        var context = 
+        e.WithTitle("")
+    } */ 
 }
-

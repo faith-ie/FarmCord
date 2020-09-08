@@ -12,4 +12,8 @@
     {
         get; set;
     }
+    public int BotVersion
+    {
+        get; set;
+    }
 }
