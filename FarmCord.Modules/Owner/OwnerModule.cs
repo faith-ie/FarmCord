@@ -52,36 +52,11 @@ namespace FarmCord.Owner.Module
         [Alias("ubl")]
         public async Task UserBlackListAsync(ulong userid, string reason = "")
         {
-            var user = Context.Client.GetUserAsync(userid);
-            var userId = user.Id;
-            var bandate = DateTime.UtcNow;
-            var client = new MongoClient("mongodb://localhost:27017");
-            var db = client.GetDatabase("DiscordUser");
-            var collection = db.GetCollection<BsonDocument>("UserBlackLists");
-            var UserBlackListDoc = new BsonDocument
-            {
-                {"userID", userId },
-                {"BanDate", bandate },
-                {"Reason", reason }
-            };
-            try
-            {
-                /* var find = await collection.FindAsync(UserBlackListDoc);
-                 find.Single(userId);*/
-                await collection.InsertOneAsync(UserBlackListDoc);
-                var e = new EmbedBuilder();
-                e.WithDescription("👌");
-                e.WithColor(Color.DarkTeal);
-                ReplyAsync(embed: e.Build());
+            /*    var UBLD = new UserBlackListDoc();
+                userid = await Context.Client.GetUserAsync(userid)
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Console.ReadLine();
-            }
+            } */
         }
-
         [Command("dm")]
         [Summary("DM's a person")]
         public async Task DmAsync(string user, [Remainder] string dm = "")
@@ -134,10 +109,13 @@ namespace FarmCord.Owner.Module
         }
         [Command("shutdown")]
         [Summary("Shuts down the bot")]
-        [Alias("die", "kill")]
+        [Alias("die", "kill", "commit die")]
         public async Task ShutDownAsync([Remainder][Summary("Shuts down the bot")] string shutdown = "")
         {
-            await ReplyAsync("Shutting Down");
+            var e = new EmbedBuilder();
+            e.WithDescription($"**{Context.User.ToString()}** shutting down");
+            e.WithColor(Color.DarkTeal);
+            await ReplyAsync(embed: e.Build());
             System.Environment.Exit(0);
         }
         [Command("rez")]

@@ -67,11 +67,11 @@ namespace FarmCord.General.Module
         }
 
     }
-   /* [Command("botstats")]
-    public async Task StatsAsync([Remainder][Summary("botstats"] int BotVersion, string = "")
-    {
-        var e = new EmbedBuilder();
-        var context = 
-        e.WithTitle("")
-    } */ 
+    /* [Command("botstats")]
+     public async Task StatsAsync([Remainder][Summary("botstats"] int BotVersion, string = "")
+     {
+         var e = new EmbedBuilder();
+         var context = 
+         e.WithTitle("")
+     } */
 }

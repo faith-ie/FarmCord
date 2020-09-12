@@ -2,7 +2,6 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Driver;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -16,16 +15,12 @@ namespace FarmCord
         private IServiceProvider _services;
         private CommandService _commands;
         public static Config Config = null;
-
+        public static ServerBlackListDoc ServerBlackListDoc = null;
+        public static UserBlackListDoc UserBlackListDoc = null;
+        public static MongoService MongoService = null;
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
-        public async Task MongoService()
 
-        {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var db = client.GetDatabase("DiscordUser");
-
-        }
         public async Task MainAsync()
 
         {
