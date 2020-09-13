@@ -16,24 +16,23 @@ namespace FarmCord.Owner.Module
         [Alias("sbl")]
         public async Task ServerBlackListAsync(ulong serverid, string reason = "")
         {
-            var server = await Context.Client.GetGuildAsync(serverid);
-            var GuildName = server.Name;
-            var GuildId = server.Id;
+            IGuild server = await Context.Client.GetGuildAsync(serverid);
+            var SBLD = new ServerBlackListDoc
+            {
+                ServerName = server.Name,
+                ServerId = server.Id,
+                BanDate = DateTime.UtcNow,
+                Reason = reason
+            };
+
+
             var client = new MongoClient("mongodb://localhost:27017");
-            var bandate = DateTime.UtcNow;
             var db = client.GetDatabase("DiscordUser");
-            var collection = db.GetCollection<BsonDocument>("ServerBlackLists");
-            var ServerBlackListDoc = new BsonDocument
-                {
-                    {"name", $"{GuildName}" },
-                    {"GuildId", $"{GuildId}" },
-                    { "BanDate", bandate },
-                    { "Reason", reason
-                }
-                };
+            var collection = db.GetCollection<object>("ServerBlackLists");
+
             try
             {
-                await collection.InsertOneAsync(ServerBlackListDoc);
+                await collection.InsertOneAsync(SBLD);
                 var e = new EmbedBuilder();
                 e.WithDescription("👌");
                 e.WithColor(Color.DarkTeal);
@@ -52,10 +51,37 @@ namespace FarmCord.Owner.Module
         [Alias("ubl")]
         public async Task UserBlackListAsync(ulong userid, string reason = "")
         {
-            /*    var UBLD = new UserBlackListDoc();
-                userid = await Context.Client.GetUserAsync(userid)
+            var UBLD = new UserBlackListDoc
+            {
+                UserId = userid,
+                BanDate = DateTime.UtcNow,
+                Reason = reason
+            };
+            IUser user = await Context.Client.GetUserAsync(userid);
+            /* var mongoservice = new MongoService
+             {
+                 MongoUrl = "mongodb://localhost:27017",
+                 Database = "DiscordUser",
+                 Collection = "UserBlackLists"
+             };*/
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("DiscordUser");
+            var collection = db.GetCollection<object>("UserBlackLists");
+            try
+            {
+                await collection.InsertOneAsync(UBLD);
+                var e = new EmbedBuilder();
+                e.WithDescription("👌");
+                e.WithColor(Color.DarkTeal);
+                await ReplyAsync(embed: e.Build());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
 
-            } */
+
         }
         [Command("dm")]
         [Summary("DM's a person")]
