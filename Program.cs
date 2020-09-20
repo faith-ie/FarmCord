@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+
 namespace FarmCord
 {
     public class Program
@@ -18,8 +19,8 @@ namespace FarmCord
         public static ServerBlackListDoc ServerBlackListDoc = null;
         public static UserBlackListDoc UserBlackListDoc = null;
         public static MongoService MongoService = null;
-        static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
+        private static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()
 
@@ -31,7 +32,7 @@ namespace FarmCord
                 LogLevel = LogSeverity.Info
             });
             _client.Log += Log;
-            await _client.LoginAsync(TokenType.Bot, Config.token);
+            await _client.LoginAsync(TokenType.Bot, Config.Token);
             await _client.StartAsync();
             _commands = new CommandService();
             _services = new ServiceCollection()
@@ -43,11 +44,13 @@ namespace FarmCord
 
             await Task.Delay(-1);
         }
+
         private Task Log(LogMessage message)
         {
             Console.WriteLine(message.ToString());
             return Task.CompletedTask;
         }
+
         public class CommandHandler
         {
             private readonly DiscordSocketClient _client;
@@ -58,11 +61,13 @@ namespace FarmCord
                 _commands = commands;
                 _client = client;
             }
+
             public async Task InstallCommandsAsync()
             {
                 _client.MessageReceived += HandleCommandAsync;
                 await _commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(), services: null);
             }
+
             private async Task HandleCommandAsync(SocketMessage messageParam)
             {
                 var message = messageParam as SocketUserMessage;
@@ -75,9 +80,7 @@ namespace FarmCord
                     context: context,
                     argPos: argPos,
                     services: null);
-
             }
         }
     }
 }
-
