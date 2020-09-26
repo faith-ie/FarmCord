@@ -1,5 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
+using MongoDB.Driver;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -66,7 +68,52 @@ namespace FarmCord.General.Module
             await ReplyAsync("Would you like to start a farm? Yes or No");
         }
 
+
+        [Command("prefix")]
+        [Summary("set the bots prefix")]
+        public async Task PrefixAsync(ulong serverid, string prefix = "")
+        {
+            var prefixmaker = new PrefixService()
+            {
+                ServerId = serverid,
+                Prefix = prefix
+            };
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("DiscordUser");
+            var collection = db.GetCollection<object>("Prefixes");
+            try
+            {
+                collection.InsertOne(prefixmaker);
+                var e = new EmbedBuilder();
+
+                e.WithColor(Color.DarkTeal);
+                e.WithDescription($"Your server prefix is now {prefix}!");
+                await ReplyAsync(embed: e.Build());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
+        }
+          /*  [Command("banana")]
+            [Summary("banan")]
+            public async Task BananaAsync()
+        {
+            try
+            {
+                await ReplyAsync("http://faith.is-a-qt.wtf/ShareX/2020/09/Banana.jpg");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
+        }*/
     }
+
+    }
+
     /* [Command("botstats")]
      public async Task StatsAsync([Remainder][Summary("botstats"] int BotVersion, string = "")
      {
@@ -74,4 +121,3 @@ namespace FarmCord.General.Module
          var context = 
          e.WithTitle("")
      } */
-}
