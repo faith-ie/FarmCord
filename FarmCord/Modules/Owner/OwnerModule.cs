@@ -131,7 +131,7 @@ namespace FarmCord.Owner.Module
         [Summary("Sets the bots status")]
         public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
         {
-            await ReplyAsync("0215028");
+          
         }
         [Command("shutdown")]
         [Summary("Shuts down the bot")]
@@ -144,10 +144,6 @@ namespace FarmCord.Owner.Module
             await ReplyAsync(embed: e.Build());
             System.Environment.Exit(0);
         }
-        [Command("rez")]
-        public async Task RezHornyAsync()
-        {
-            await ReplyAsync("<@241288855368499200> Horny");
-        }
+       
     }
 }

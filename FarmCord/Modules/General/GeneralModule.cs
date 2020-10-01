@@ -48,8 +48,14 @@ namespace FarmCord.General.Module
             var e = new EmbedBuilder();
             e.WithColor(Color.DarkTeal);
             e.WithDescription($"**{Context.User.ToString()}**  🏓 {sw.ElapsedMilliseconds}ms");
-            await ReplyAsync(embed: e.Build());
-
+            try
+            {
+                await ReplyAsync(embed: e.Build());
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine(E);
+            }
 
         }
 
@@ -58,14 +64,32 @@ namespace FarmCord.General.Module
         [Alias("sh")]
         public async Task ShopAsync([Remainder][Summary("Show the bot's shop!")] string shop = "")
         {
-            await ReplyAsync("Welcome to the store! Unfortunately it is under construction.");
+            var e = new EmbedBuilder();
+            e.WithTitle("FarmCord Shop");
+            e.WithDescription("**Seeds**\nWatermelon seed (4) - FC$50\nCantalope Seeds (6) - FC$45\nCorn Seeds (5) - FC$60 ");
+            e.WithColor(Color.DarkTeal);
+            try
+            {
+                await ReplyAsync(embed: e.Build());
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine(er);
+            }
+
         }
 
         [Command("start")]
         [Summary("farming")]
         public async Task StartAsync([Remainder][Summary("Start a farm!")] string start = "")
         {
-            await ReplyAsync("Would you like to start a farm? Yes or No");
+
+            var e = new EmbedBuilder();
+            e.WithDescription("Would you like to start a farm? Yes or no?");
+            e.WithColor(Color.DarkTeal);
+            await ReplyAsync(embed: e.Build());
+
+
         }
 
 
@@ -95,29 +119,9 @@ namespace FarmCord.General.Module
                 Console.WriteLine(e);
                 Console.ReadLine();
             }
+
         }
-          /*  [Command("banana")]
-            [Summary("banan")]
-            public async Task BananaAsync()
-        {
-            try
-            {
-                await ReplyAsync("http://faith.is-a-qt.wtf/ShareX/2020/09/Banana.jpg");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Console.ReadLine();
-            }
-        }*/
     }
 
-    }
+}
 
-    /* [Command("botstats")]
-     public async Task StatsAsync([Remainder][Summary("botstats"] int BotVersion, string = "")
-     {
-         var e = new EmbedBuilder();
-         var context = 
-         e.WithTitle("")
-     } */
