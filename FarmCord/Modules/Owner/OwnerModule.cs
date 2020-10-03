@@ -131,7 +131,7 @@ namespace FarmCord.Owner.Module
         [Summary("Sets the bots status")]
         public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
         {
-          
+
         }
         [Command("shutdown")]
         [Summary("Shuts down the bot")]
@@ -144,6 +144,6 @@ namespace FarmCord.Owner.Module
             await ReplyAsync(embed: e.Build());
             System.Environment.Exit(0);
         }
-       
+
     }
 }
