@@ -25,7 +25,7 @@ namespace FarmCord
         public async Task MainAsync()
 
         {
-            Config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(@"F:/Programming/c#/FarmCord/FarmCord/config.json"));
+            Config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(@"C:/Users/Danny/Desktop/Folder/fc/farmcord/FarmCord/config.json"));
 
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {

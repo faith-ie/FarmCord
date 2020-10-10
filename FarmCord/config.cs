@@ -1,4 +1,6 @@
-﻿public class Config
+﻿using System.Collections.Generic;
+
+public class Config
 {
     public string Token
     {
@@ -16,6 +18,10 @@
     }
 
     public int BotVersion
+    {
+        get; set;
+    }
+    public string OwnerID
     {
         get; set;
     }

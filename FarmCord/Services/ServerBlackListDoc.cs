@@ -1,5 +1,4 @@
 ﻿using System;
-
 public class ServerBlackListDoc
 {
     public string ServerName

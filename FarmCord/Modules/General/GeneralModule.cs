@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using Discord.Net.WebSockets;
 using MongoDB.Driver;
 using System;
 using System.Diagnostics;
@@ -120,6 +121,17 @@ namespace FarmCord.General.Module
                 Console.ReadLine();
             }
 
+        }
+        [Command("stats")]
+        public async Task StatsAsync()
+        {
+            ISelfUser client = Context.Client.CurrentUser;
+            var e = new EmbedBuilder();
+            e.WithTitle($"FarmCord v{Program.Config.BotVersion}");
+            e.WithUrl("https://github.com/Faith1sGay/Farmcord");
+            e.WithDescription($"**Author**                            **Bot ID**                            **Owner IDs**\nFVSAEZI#2700                            {Program.Config.clientID}                            {Program.Config.OwnerID}");
+            e.WithColor(Color.DarkTeal);
+            await ReplyAsync(embed: e.Build());
         }
     }
 

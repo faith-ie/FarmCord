@@ -131,7 +131,7 @@ namespace FarmCord.Owner.Module
         [Summary("Sets the bots status")]
         public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
         {
-
+            ISelfUser client = Context.Client.CurrentUser;
         }
         [Command("shutdown")]
         [Summary("Shuts down the bot")]
@@ -147,3 +147,4 @@ namespace FarmCord.Owner.Module
 
     }
 }
+
