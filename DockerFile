@@ -5,6 +5,8 @@ COPY *.csproj .
 
 COPY /FarmCord .
 
+COPY ./FarmCord/config.json ./bin/Debug/netcoreapp3.1
+
 RUN dotnet restore
 
 RUN dotnet build
