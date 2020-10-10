@@ -1,12 +1,10 @@
 version: '3.8'
 
 services:
-  redis-service:
-    image: 'redis'
   mongo-service:
     image: 'mongo'
   bot-service:
     restart: unless-stopped
     build:
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
       context: ./

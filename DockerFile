@@ -3,12 +3,10 @@ WORKDIR /source
 
 COPY *.csproj .
 
-RUN cd source
-
 RUN dotnet restore
 
 RUN dotnet build
 
-RUN dotnet RUN
+RUN dotnet run
 
 
