@@ -8,7 +8,7 @@ bin
 
 obj
 
-/FarmCord/config.json
+./FarmCord/config.json
 
 
 
