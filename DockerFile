@@ -3,6 +3,8 @@ WORKDIR /source
 
 COPY *.csproj .
 
+COPY /FarmCord .
+
 RUN dotnet restore
 
 RUN dotnet build
