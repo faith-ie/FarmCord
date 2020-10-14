@@ -15,7 +15,7 @@ namespace FarmCord
         private DiscordSocketClient _client;
         private IServiceProvider _services;
         private CommandService _commands;
-        public static Config Config = null;
+        public static creds creds = null;
         public static ServerBlackListDoc ServerBlackListDoc = null;
         public static UserBlackListDoc UserBlackListDoc = null;
         public static MongoService MongoService = null;
@@ -25,14 +25,14 @@ namespace FarmCord
         public async Task MainAsync()
 
         {
-            Config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(@"./FarmCord/config.json"));
+            creds = JsonConvert.DeserializeObject<creds>(File.ReadAllText(@"C:/Users/Danny/Desktop/farmcord/FarmCord/creds.json"));
 
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
                 LogLevel = LogSeverity.Info
             });
             _client.Log += Log;
-            await _client.LoginAsync(TokenType.Bot, Config.Token);
+            await _client.LoginAsync(TokenType.Bot, creds.Token);
             await _client.StartAsync();
             _commands = new CommandService();
             _services = new ServiceCollection()
@@ -73,7 +73,7 @@ namespace FarmCord
                 var message = messageParam as SocketUserMessage;
                 if (message == null) return;
                 int argPos = 0;
-                if (!(message.HasStringPrefix(Config.prefix, ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
+                if (!(message.HasStringPrefix(creds.prefix, ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
                 if (message.Author.IsBot) return;
                 var context = new SocketCommandContext(_client, message);
                 var result = await _commands.ExecuteAsync(

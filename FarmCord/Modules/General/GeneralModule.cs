@@ -2,6 +2,7 @@
 using Discord.Commands;
 using Discord.Net.WebSockets;
 using MongoDB.Driver;
+using ImageMagick;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -85,11 +86,25 @@ namespace FarmCord.General.Module
         public async Task StartAsync([Remainder][Summary("Start a farm!")] string start = "")
         {
 
+            /* var e = new EmbedBuilder();
+             e.WithDescription("Would you like to start a farm? Yes or no?");
+             e.WithColor(Color.DarkTeal);
+             await ReplyAsync(embed: e.Build());*/
+            var image = new MagickImage("C:/Users/Danny/Desktop/farmcord/FarmCord/Assets/Island.png");
+            {
+                IUser user = Context.User;
+                var id = user.Id;
+                new Drawables()
+                    .FontPointSize(72)
+                    .Font("Comic Sans")
+                    .StrokeColor(new MagickColor("White"))
+                    .TextAlignment(TextAlignment.Center)
+                    .Text(500, 75, $"{Context.User.Username.ToString()}'s Farm")
+                    .Draw(image);
+                image.Write($"C:/Users/Danny/Desktop/farmcord/FarmCord/FarmOutput/Farm_{id}.png");
+            }
             var e = new EmbedBuilder();
-            e.WithDescription("Would you like to start a farm? Yes or no?");
-            e.WithColor(Color.DarkTeal);
-            await ReplyAsync(embed: e.Build());
-
+            await Context.Channel.SendFileAsync($"C:/Users/Danny/Desktop/farmcord/FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
 
         }
 
@@ -127,9 +142,9 @@ namespace FarmCord.General.Module
         {
             ISelfUser client = Context.Client.CurrentUser;
             var e = new EmbedBuilder();
-            e.WithTitle($"FarmCord v{Program.Config.BotVersion}");
+            e.WithTitle($"FarmCord v{Program.creds.BotVersion}");
             e.WithUrl("https://github.com/Faith1sGay/Farmcord");
-            e.WithDescription($"**Author**                            **Bot ID**                            **Owner IDs**\nFVSAEZI#2700                            {Program.Config.clientID}                            {Program.Config.OwnerID}");
+            e.WithDescription($"**Author**                            **Bot ID**                            **Owner IDs**\nFVSAEZI#2700                            {Program.creds.clientID}                            {Program.creds.OwnerID}");
             e.WithColor(Color.DarkTeal);
             await ReplyAsync(embed: e.Build());
         }

@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-
-public class Config
+﻿
+public class creds
 {
     public string Token
     {
