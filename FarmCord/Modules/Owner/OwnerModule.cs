@@ -34,14 +34,19 @@ namespace FarmCord.Owner.Module
             {
                 await collection.InsertOneAsync(SBLD);
                 var e = new EmbedBuilder();
-                e.WithDescription("👌");
+                e.WithDescription($"Server **{server.Name}** `{server.Id}` has been blacklisted. 👌");
                 e.WithColor(Color.DarkTeal);
                 await ReplyAsync(embed: e.Build());
             }
+           
             catch (Exception e)
             {
+                
                 Console.WriteLine(e);
-                Console.ReadLine();
+                var E = new EmbedBuilder();
+                E.WithColor(16519939);
+                E.WithDescription(e.Message.ToString());
+                await Context.Channel.SendMessageAsync(text: "OH FUCK I BROKE", embed: E.Build());
 
             }
 
@@ -49,38 +54,39 @@ namespace FarmCord.Owner.Module
         [Command("userblacklist")]
         [Summary("Blacklists users from using the bot")]
         [Alias("ubl")]
-        public async Task UserBlackListAsync(ulong userid, string reason = "")
+        public async Task UserBlackListAsync(ulong userid, string username, string reason = "")
         {
+            IUser user = await Context.Client.GetUserAsync(userid);
+
             var UBLD = new UserBlackListDoc
             {
                 UserId = userid,
                 BanDate = DateTime.UtcNow,
-                Reason = reason
+                Reason = reason,
+                UserName = user.Username
             };
-            IUser user = await Context.Client.GetUserAsync(userid);
-            /* var mongoservice = new MongoService
-             {
-                 MongoUrl = "mongodb://localhost:27017",
-                 Database = "DiscordUser",
-                 Collection = "UserBlackLists"
-             };*/
+            var uname = user.Username;
             var client = new MongoClient("mongodb://localhost:27017");
             var db = client.GetDatabase("DiscordUser");
             var collection = db.GetCollection<object>("UserBlackLists");
+           
             try
             {
+                
                 await collection.InsertOneAsync(UBLD);
                 var e = new EmbedBuilder();
-                e.WithDescription("👌");
+                e.WithDescription($"User **{uname}** `{userid}` has been blacklisted. 👌");
                 e.WithColor(Color.DarkTeal);
                 await ReplyAsync(embed: e.Build());
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Console.ReadLine();
+                var E = new EmbedBuilder();
+                E.WithColor(16519939);
+                E.WithDescription(e.Message.ToString());
+                await Context.Channel.SendMessageAsync(text: "OH FUCK I BROKE", embed: E.Build());
             }
-
 
         }
         [Command("dm")]
@@ -131,7 +137,7 @@ namespace FarmCord.Owner.Module
         [Summary("Sets the bots status")]
         public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
         {
-            ISelfUser client = Context.Client.CurrentUser;
+          
         }
         [Command("shutdown")]
         [Summary("Shuts down the bot")]
@@ -144,7 +150,6 @@ namespace FarmCord.Owner.Module
             await ReplyAsync(embed: e.Build());
             System.Environment.Exit(0);
         }
-
+       
     }
 }
-

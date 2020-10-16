@@ -1,9 +1,8 @@
 ﻿using Discord;
 using Discord.Commands;
-using Discord.Net.WebSockets;
 using MongoDB.Driver;
-using ImageMagick;
 using System;
+using ImageMagick;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -136,17 +135,6 @@ namespace FarmCord.General.Module
                 Console.ReadLine();
             }
 
-        }
-        [Command("stats")]
-        public async Task StatsAsync()
-        {
-            ISelfUser client = Context.Client.CurrentUser;
-            var e = new EmbedBuilder();
-            e.WithTitle($"FarmCord v{Program.creds.BotVersion}");
-            e.WithUrl("https://github.com/Faith1sGay/Farmcord");
-            e.WithDescription($"**Author**                            **Bot ID**                            **Owner IDs**\nFVSAEZI#2700                            {Program.creds.clientID}                            {Program.creds.OwnerID}");
-            e.WithColor(Color.DarkTeal);
-            await ReplyAsync(embed: e.Build());
         }
     }
 
