@@ -89,7 +89,7 @@ namespace FarmCord.General.Module
              e.WithDescription("Would you like to start a farm? Yes or no?");
              e.WithColor(Color.DarkTeal);
              await ReplyAsync(embed: e.Build());*/
-            var image = new MagickImage("C:/Users/Danny/Desktop/farmcord/FarmCord/Assets/Island.png");
+            var image = new MagickImage("./FarmCord/Assets/Island.png");
             {
                 IUser user = Context.User;
                 var id = user.Id;
@@ -100,10 +100,10 @@ namespace FarmCord.General.Module
                     .TextAlignment(TextAlignment.Center)
                     .Text(500, 75, $"{Context.User.Username.ToString()}'s Farm")
                     .Draw(image);
-                image.Write($"C:/Users/Danny/Desktop/farmcord/FarmCord/FarmOutput/Farm_{id}.png");
+                image.Write($"./FarmCord/FarmOutput/Farm_{id}.png");
             }
             var e = new EmbedBuilder();
-            await Context.Channel.SendFileAsync($"C:/Users/Danny/Desktop/farmcord/FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
+            await Context.Channel.SendFileAsync($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
 
         }
 

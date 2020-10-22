@@ -2,16 +2,10 @@
 
 .vs
 
-.gitignore
-
 bin
 
 obj
 
-./FarmCord/creds.json
+creds.json
 
-./FarmCord/FarmOutput
-
-
-
-
+FarmOutput

@@ -6,5 +6,5 @@ services:
   bot-service:
     restart: unless-stopped
     build:
-      dockerfile: DockerFile
+      dockerfile: Dockerfile
       context: ./
