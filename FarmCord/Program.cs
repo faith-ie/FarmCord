@@ -45,6 +45,7 @@ namespace FarmCord
             await Task.Delay(-1);
         }
 
+
         private Task Log(LogMessage message)
         {
             Console.WriteLine(message.ToString());
@@ -73,7 +74,7 @@ namespace FarmCord
                 var message = messageParam as SocketUserMessage;
                 if (message == null) return;
                 int argPos = 0;
-                if (!(message.HasStringPrefix(creds.prefix, ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
+                if (!(message.HasStringPrefix(creds.prefix.ToString().ToLower(), ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
                 if (message.Author.IsBot) return;
                 var context = new SocketCommandContext(_client, message);
                 var result = await _commands.ExecuteAsync(

@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 public class creds
 {
     public string Token
@@ -6,7 +6,7 @@ public class creds
         get; set;
     }
 
-    public string prefix
+    public List<string[]> prefix 
     {
         get; set;
     }
@@ -24,4 +24,9 @@ public class creds
     {
         get; set;
     }
+    public int EmbedColor
+    {
+        get; set;
+    }
+    
 }

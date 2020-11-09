@@ -1,6 +1,5 @@
 ﻿using Discord;
 using Discord.Commands;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
@@ -35,13 +34,13 @@ namespace FarmCord.Owner.Module
                 await collection.InsertOneAsync(SBLD);
                 var e = new EmbedBuilder();
                 e.WithDescription($"Server **{server.Name}** `{server.Id}` has been blacklisted. 👌");
-                e.WithColor(Color.DarkTeal);
+                e.WithColor(3468126);
                 await ReplyAsync(embed: e.Build());
             }
-           
+
             catch (Exception e)
             {
-                
+
                 Console.WriteLine(e);
                 var E = new EmbedBuilder();
                 E.WithColor(16519939);
@@ -69,14 +68,14 @@ namespace FarmCord.Owner.Module
             var client = new MongoClient("mongodb://localhost:27017");
             var db = client.GetDatabase("DiscordUser");
             var collection = db.GetCollection<object>("UserBlackLists");
-           
+
             try
             {
-                
+
                 await collection.InsertOneAsync(UBLD);
                 var e = new EmbedBuilder();
                 e.WithDescription($"User **{uname}** `{userid}` has been blacklisted. 👌");
-                e.WithColor(Color.DarkTeal);
+                e.WithColor(3468126);
                 await ReplyAsync(embed: e.Build());
             }
             catch (Exception e)
@@ -99,18 +98,24 @@ namespace FarmCord.Owner.Module
             var embed = new EmbedBuilder();
             embed.WithAuthor($"Owner of {client}");
             embed.WithThumbnailUrl(client.GetAvatarUrl());
-            embed.WithColor(Color.DarkTeal);
+            embed.WithColor(3468126);
             embed.WithDescription(dm);
             embed.WithFooter("You can reply to this message with =>contact");
             try
             {
                 await Dm.SendMessageAsync(embed: embed.Build());
+                var Embed = new EmbedBuilder();
+                Embed.WithColor(3468126);
+                Embed.WithDescription($"**{Context.User.ToString()}** DM successfully sent to `{User.Username.ToString()}` || `{User.Id}`.");
+               await Context.Channel.SendMessageAsync(embed: Embed.Build());
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Console.ReadLine();
-
+                var E = new EmbedBuilder();
+                E.WithColor(16519939);
+                E.WithDescription(e.Message.ToString());
+                await Context.Channel.SendMessageAsync(text: "OH FUCK I BROKE", embed: E.Build());
             }
         }
         [Command("listservers")]
@@ -137,7 +142,7 @@ namespace FarmCord.Owner.Module
         [Summary("Sets the bots status")]
         public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
         {
-          
+
         }
         [Command("shutdown")]
         [Summary("Shuts down the bot")]
@@ -146,10 +151,10 @@ namespace FarmCord.Owner.Module
         {
             var e = new EmbedBuilder();
             e.WithDescription($"**{Context.User.ToString()}** shutting down");
-            e.WithColor(Color.DarkTeal);
+            e.WithColor(3468126);
             await ReplyAsync(embed: e.Build());
             System.Environment.Exit(0);
         }
-       
+
     }
 }

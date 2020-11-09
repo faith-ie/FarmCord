@@ -1,8 +1,8 @@
 ﻿using Discord;
 using Discord.Commands;
+using ImageMagick;
 using MongoDB.Driver;
 using System;
-using ImageMagick;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -19,7 +19,7 @@ namespace FarmCord.General.Module
             ISelfUser client = Context.Client.CurrentUser;
             e.WithTitle($"{client} Help");
             e.WithDescription("`Help`\nLists the bot's commands\n`Invite`\nInvites the bot\n`Ping`\nBot's connection to Discord\n`Shop`\nGet your seeds and items here!\n`Start`\nStart your farm!");
-            e.WithColor(Color.DarkTeal);
+            e.WithColor(3468126);
             await ReplyAsync(embed: e.Build());
         }
         /*  [Command("Contact")]
@@ -33,7 +33,7 @@ namespace FarmCord.General.Module
         public async Task InviteAsync([Remainder][Summary("Invite the bot")] string invite = "")
         {
             var e = new EmbedBuilder();
-            e.WithColor(Color.DarkTeal);
+            e.WithColor(3468126);
             e.WithDescription("Invite me! https://discordapp.com/oauth2/authorize?client_id=630849680431120385&permissions=67423296&scope=bot");
             await ReplyAsync(embed: e.Build());
         }
@@ -47,7 +47,7 @@ namespace FarmCord.General.Module
             sw.Stop();
             await message.DeleteAsync();
             var e = new EmbedBuilder();
-            e.WithColor(Color.DarkTeal);
+            e.WithColor(3468126);
             e.WithDescription($"**{Context.User.ToString()}**  🏓 {sw.ElapsedMilliseconds}ms");
             try
             {
@@ -68,7 +68,7 @@ namespace FarmCord.General.Module
             var e = new EmbedBuilder();
             e.WithTitle("FarmCord Shop");
             e.WithDescription("**Seeds**\nWatermelon seed (4) - FC$50\nCantalope Seeds (6) - FC$45\nCorn Seeds (5) - FC$60 ");
-            e.WithColor(Color.DarkTeal);
+            e.WithColor(3468126);
             try
             {
                 await ReplyAsync(embed: e.Build());
@@ -103,7 +103,22 @@ namespace FarmCord.General.Module
                 image.Write($"./FarmCord/FarmOutput/Farm_{id}.png");
             }
             var e = new EmbedBuilder();
-            await Context.Channel.SendFileAsync($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
+            try
+            {
+
+              /*  e.WithDescription($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
+                e.WithColor(3468126);*/
+
+                await Context.Channel.SendFileAsync(embed: e.Build(), filePath: $"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
+            }
+            catch (Exception Err)
+            {
+                Console.WriteLine(Err);
+                var E = new EmbedBuilder();
+                E.WithColor(16519939);
+                E.WithDescription(Err.Message.ToString());
+                await Context.Channel.SendMessageAsync(text: "Oops, something went wrong.", embed: E.Build());
+            }
 
         }
 
@@ -125,15 +140,23 @@ namespace FarmCord.General.Module
                 collection.InsertOne(prefixmaker);
                 var e = new EmbedBuilder();
 
-                e.WithColor(Color.DarkTeal);
-                e.WithDescription($"Your server prefix is now {prefix}!");
+                e.WithColor(3468126);
+                e.WithDescription($"**{Context.User.ToString()}** the server prefix is now {prefix}!");
                 await ReplyAsync(embed: e.Build());
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Console.ReadLine();
+                var E = new EmbedBuilder();
+                E.WithColor(16519939);
+                E.WithDescription(e.Message.ToString());
+                await Context.Channel.SendMessageAsync(text: "Oops, something went wrong.", embed: E.Build());
+
             }
+
+        }
+        public async Task StatsAsync()
+        {
 
         }
     }
