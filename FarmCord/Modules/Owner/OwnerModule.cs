@@ -107,7 +107,7 @@ namespace FarmCord.Owner.Module
                 var Embed = new EmbedBuilder();
                 Embed.WithColor(3468126);
                 Embed.WithDescription($"**{Context.User.ToString()}** DM successfully sent to `{User.Username.ToString()}` || `{User.Id}`.");
-               await Context.Channel.SendMessageAsync(embed: Embed.Build());
+                await Context.Channel.SendMessageAsync(embed: Embed.Build());
             }
             catch (Exception e)
             {

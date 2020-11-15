@@ -6,7 +6,7 @@ public class creds
         get; set;
     }
 
-    public List<string[]> prefix 
+    public string prefix
     {
         get; set;
     }
@@ -28,5 +28,5 @@ public class creds
     {
         get; set;
     }
-    
+
 }

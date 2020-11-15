@@ -2,8 +2,11 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
+using MongoDB.Driver.Core.Servers;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -34,6 +37,20 @@ namespace FarmCord
             _client.Log += Log;
             await _client.LoginAsync(TokenType.Bot, creds.Token);
             await _client.StartAsync();
+            _client.Ready += () =>
+           {
+               // List<ServerBlackListDoc> serverBlackLists;
+               // var  Sbl = serverBlackLists.ToArray();
+
+               _client.SetGameAsync("Start your farm today!");
+               var c = new MongoClient("mongodb://localhost:27017");
+               var d = c.GetDatabase("DiscordUser");
+               var co = d.GetCollection<object>("ServerBlackLists");
+               //  var sbl = co.Find(
+               var sbl = Builders<ServerBlackListDoc>.Filter.Eq("ServerId", true);
+               //  if (sbl) return null;
+               return Task.CompletedTask;
+           };
             _commands = new CommandService();
             _services = new ServiceCollection()
         .AddSingleton(_client)

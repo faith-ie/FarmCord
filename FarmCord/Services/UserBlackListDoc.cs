@@ -13,7 +13,7 @@ public class UserBlackListDoc
     public string Reason
     {
         get; set;
-       
+
     }
     public string UserName
     {
