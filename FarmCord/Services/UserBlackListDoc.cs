@@ -1,5 +1,4 @@
 ﻿using System;
-
 public class UserBlackListDoc
 {
     public ulong UserId

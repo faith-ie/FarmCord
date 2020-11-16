@@ -3,10 +3,8 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
-using MongoDB.Driver.Core.Servers;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -61,7 +59,6 @@ namespace FarmCord
 
             await Task.Delay(-1);
         }
-
 
         private Task Log(LogMessage message)
         {

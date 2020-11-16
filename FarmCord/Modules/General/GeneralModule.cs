@@ -109,7 +109,7 @@ namespace FarmCord.General.Module
                 /*  e.WithDescription($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
                   e.WithColor(3468126);*/
 
-                await Context.Channel.SendFileAsync(embed: e.Build(), filePath: $"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
+                await Context.Channel.SendFileAsync(filePath: $"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
             }
             catch (Exception Err)
             {
@@ -155,11 +155,28 @@ namespace FarmCord.General.Module
             }
 
         }
+        [Command("stats")]
         public async Task StatsAsync()
         {
-
+            var dnet = typeof(Discord.WebSocket.BaseSocketClient).Assembly.GetName().Version;
+            var dotnet = typeof(System.Version).Assembly.GetName().Version;
+            var sys = Process.GetCurrentProcess();
+            var sw = new Stopwatch();
+            sw.Start();
+            // var sysmin
+            var process = System.Environment.ProcessorCount;
+            var uptime = Process.GetCurrentProcess().StartTime.ToString();
+            var syssec = sys.StartTime.Second.ToString();
+            var cpu = System.Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER");
+            var e = new EmbedBuilder();
+            e.AddField("Current Uptime: ", $"{uptime}");
+            e.AddField("Discord.Net Version: ", dnet);
+            e.AddField("DotNet Version: ", dotnet);
+            e.AddField("Processors: ", process.ToString());
+            //  e.AddField("Processor Type: ", cpu);
+            e.WithColor(Color.DarkTeal);
+            await ReplyAsync(embed: e.Build());
         }
     }
 
 }
-

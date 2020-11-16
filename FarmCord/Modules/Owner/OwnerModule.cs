@@ -53,7 +53,7 @@ namespace FarmCord.Owner.Module
         [Command("userblacklist")]
         [Summary("Blacklists users from using the bot")]
         [Alias("ubl")]
-        public async Task UserBlackListAsync(ulong userid, string username, string reason = "")
+        public async Task UserBlackListAsync(ulong userid, string reason = "")
         {
             IUser user = await Context.Client.GetUserAsync(userid);
 
@@ -142,7 +142,7 @@ namespace FarmCord.Owner.Module
         [Summary("Sets the bots status")]
         public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
         {
-
+            await ReplyAsync("h");
         }
         [Command("shutdown")]
         [Summary("Shuts down the bot")]
@@ -153,7 +153,7 @@ namespace FarmCord.Owner.Module
             e.WithDescription($"**{Context.User.ToString()}** shutting down");
             e.WithColor(3468126);
             await ReplyAsync(embed: e.Build());
-            System.Environment.Exit(0);
+            Environment.Exit(0);
         }
 
     }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-public class creds
+﻿public class creds
 {
     public string Token
     {
