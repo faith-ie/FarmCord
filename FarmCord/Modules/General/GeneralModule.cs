@@ -109,7 +109,7 @@ namespace FarmCord.General.Module
                 /*  e.WithDescription($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
                   e.WithColor(3468126);*/
 
-                await Context.Channel.SendFileAsync(filePath: $"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
+                await Context.Channel.SendFileAsync($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
             }
             catch (Exception Err)
             {
