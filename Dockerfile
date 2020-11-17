@@ -1,27 +1,20 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
-
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS BUILDER
 WORKDIR /source
 
 COPY *.csproj .
-
-COPY /FarmCord .
-
 RUN dotnet restore
 
-RUN dotnet build
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-RUN cd ./bin/Debug/netcoreapp3.1
 
-RUN mkdir FarmCord
+FROM mcr.microsoft.com/dotnet/runtime:5.0
+WORKDIR /farm
 
-RUN cd ./bin/Debug/netcoreapp3.1/FarmCord
+COPY --from=BUILDER /source/out .
 
-RUN cp ./FarmCord/creds.json /bin/Debug/netcoreapp3.1/FarmCord/creds.json
+# def won't mess anything up :^)
+RUN rm FarmCord
 
-RUN mkdir Assets
-
-RUN cp ./FarmCord/Assets/Island.png /bin/Debug/netcoreapp3.1/FarmCord/Assets
-
-RUN mkdir FarmOutput
-
-RUN dotnet run
+COPY FarmCord/creds.json ./FarmCord/
+CMD ["dotnet", "FarmCord.dll"]
