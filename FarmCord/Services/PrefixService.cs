@@ -1,11 +1,14 @@
-﻿public class PrefixService
+﻿namespace FarmCord.Services.PrefixService
 {
-    public ulong ServerId
+    public class PrefixService
     {
-        get; set;
-    }
-    public string Prefix
-    {
-        get; set;
+        public ulong ServerId
+        {
+            get; set;
+        }
+        public string Prefix
+        {
+            get; set;
+        }
     }
 }

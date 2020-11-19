@@ -1,5 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
+using FarmCord.Services.DailyService;
+using FarmCord.Services.PrefixService;
 using ImageMagick;
 using MongoDB.Driver;
 using System;
@@ -102,12 +104,19 @@ namespace FarmCord.General.Module
                     .Draw(image);
                 image.Write($"./FarmCord/FarmOutput/Farm_{id}.png");
             }
-            var e = new EmbedBuilder();
             try
             {
+                // var CacheBytes = image.ToByteArray();
+                // MemoryStream stream = new MemoryStream();
+                //   var ho = MemoryStream(CacheBytes);
 
-                /*  e.WithDescription($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
-                  e.WithColor(3468126);*/
+
+                /*       var o = image.ToByteArray();
+                       var des = new EmbedFieldBuilder()
+                           .WithValue(o);
+                       var e = new EmbedBuilder()
+                           .AddField(des);
+                       await ReplyAsync(embed: e.Build()); */
 
                 await Context.Channel.SendFileAsync($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
             }
@@ -174,8 +183,41 @@ namespace FarmCord.General.Module
             e.AddField("DotNet Version: ", dotnet);
             e.AddField("Processors: ", process.ToString());
             //  e.AddField("Processor Type: ", cpu);
-            e.WithColor(Color.DarkTeal);
+            e.WithColor(3468126);
             await ReplyAsync(embed: e.Build());
+        }
+        [Command("daily")]
+        [Alias("timely")]
+        public async Task DailyAsync(ulong userid)
+        {
+            IUser user = await Context.Client.GetUserAsync(userid);
+            var DS = new DailyService
+            {
+                DailyDate = DateTime.UtcNow,
+                Amount = 0,
+                UserID = user.Id
+            };
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("DiscordUser");
+            var collection = db.GetCollection<object>("Dailies");
+            try
+            {
+
+                var moremoney = DS.Amount + 100;
+                var e = new EmbedBuilder();
+                e.WithDescription($"**{Context.User.Username.ToString()}**, FC${moremoney.ToString()} has been added to your account! Your balance is now {DS.Amount + moremoney}.");
+                e.WithColor(3468126);
+                await collection.InsertOneAsync(DS);
+                await ReplyAsync(embed: e.Build());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                var E = new EmbedBuilder();
+                E.WithColor(16519939);
+                E.WithDescription(e.Message.ToString());
+                await Context.Channel.SendMessageAsync(text: "Oops, something went wrong.", embed: E.Build());
+            }
         }
     }
 

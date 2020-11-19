@@ -1,6 +1,12 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using FarmCord.Services.Crop;
+using FarmCord.Services.DailyService;
+using FarmCord.Services.MongoService;
+using FarmCord.Services.PrefixService;
+using FarmCord.Services.ServerBlackListService;
+using FarmCord.Services.UserBlackListService;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using Newtonsoft.Json;
@@ -18,9 +24,11 @@ namespace FarmCord
         private CommandService _commands;
         public static creds creds = null;
         public static ServerBlackListDoc ServerBlackListDoc = null;
+        public static PrefixService PrefixService = null;
         public static UserBlackListDoc UserBlackListDoc = null;
         public static MongoService MongoService = null;
-
+        public static DailyService DailyService = null;
+        public static Crop Crop = null;
         private static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()

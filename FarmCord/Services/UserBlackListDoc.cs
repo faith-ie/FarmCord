@@ -1,21 +1,24 @@
 ﻿using System;
-public class UserBlackListDoc
+namespace FarmCord.Services.UserBlackListService
 {
-    public ulong UserId
+    public class UserBlackListDoc
     {
-        get; set;
-    }
-    public DateTime BanDate
-    {
-        get; set;
-    }
-    public string Reason
-    {
-        get; set;
+        public ulong UserId
+        {
+            get; set;
+        }
+        public DateTime BanDate
+        {
+            get; set;
+        }
+        public string Reason
+        {
+            get; set;
 
-    }
-    public string UserName
-    {
-        get; set;
+        }
+        public string UserName
+        {
+            get; set;
+        }
     }
 }

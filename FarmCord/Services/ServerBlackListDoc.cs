@@ -1,20 +1,23 @@
 ﻿using System;
-public class ServerBlackListDoc
+namespace FarmCord.Services.ServerBlackListService
 {
-    public string ServerName
+    public class ServerBlackListDoc
     {
-        get; set;
-    }
-    public ulong ServerId
-    {
-        get; set;
-    }
-    public DateTime BanDate
-    {
-        get; set;
-    }
-    public string Reason
-    {
-        get; set;
+        public string ServerName
+        {
+            get; set;
+        }
+        public ulong ServerId
+        {
+            get; set;
+        }
+        public DateTime BanDate
+        {
+            get; set;
+        }
+        public string Reason
+        {
+            get; set;
+        }
     }
 }

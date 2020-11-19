@@ -1,16 +1,19 @@
-﻿public class MongoService
+﻿namespace FarmCord.Services.MongoService
 {
-    public string MongoUrl
+    public class MongoService
     {
-        get; set;
-    }
-    public string Database
-    {
-        get; set;
-    }
-    public string Collection
-    {
-        get; set;
-    }
+        public string MongoUrl
+        {
+            get; set;
+        }
+        public string Database
+        {
+            get; set;
+        }
+        public string Collection
+        {
+            get; set;
+        }
 
+    }
 }
