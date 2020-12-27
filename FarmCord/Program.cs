@@ -45,15 +45,17 @@ namespace FarmCord
             await _client.StartAsync();
             _client.Ready += () =>
            {
+              // ulong si = ServerBlackListDoc.ServerId;
                // List<ServerBlackListDoc> serverBlackLists;
                // var  Sbl = serverBlackLists.ToArray();
-
+            //   var g = _client.GetGuild(ulong.Parse(si));
+             //  object p = g;
                _client.SetGameAsync("Start your farm today!");
                var c = new MongoClient("mongodb://localhost:27017");
                var d = c.GetDatabase("DiscordUser");
                var co = d.GetCollection<object>("ServerBlackLists");
                //  var sbl = co.Find(
-               var sbl = Builders<ServerBlackListDoc>.Filter.Eq("ServerId", true);
+           //    object filter = co.FindAsync<object>(g);
                //  if (sbl) return null;
                return Task.CompletedTask;
            };

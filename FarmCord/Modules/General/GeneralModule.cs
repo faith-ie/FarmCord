@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using System.Collections.Generic;
 using FarmCord.Services.DailyService;
 using FarmCord.Services.PrefixService;
 using ImageMagick;
@@ -118,7 +119,8 @@ namespace FarmCord.General.Module
                            .AddField(des);
                        await ReplyAsync(embed: e.Build()); */
 
-                await Context.Channel.SendFileAsync($"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
+
+                await Context.Channel.SendFileAsync(filePath: $"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
             }
             catch (Exception Err)
             {
@@ -203,7 +205,7 @@ namespace FarmCord.General.Module
             try
             {
 
-                var moremoney = DS.Amount + 100;
+                int moremoney = DS.Amount + 100;
                 var e = new EmbedBuilder();
                 e.WithDescription($"**{Context.User.Username.ToString()}**, FC${moremoney.ToString()} has been added to your account! Your balance is now {DS.Amount + moremoney}.");
                 e.WithColor(3468126);
