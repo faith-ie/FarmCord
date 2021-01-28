@@ -1,0 +1,9 @@
+{
+  "Token": "Bot Token here",
+  "Prefix": "=>",
+  "clientID": "Bot client id here",
+  "BotVersion": 2,
+  "OwnerID": "Your id here",
+  "EmbedColor":3468126,
+  "ErrorColor":16519939
+}

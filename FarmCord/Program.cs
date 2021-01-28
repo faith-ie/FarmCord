@@ -45,17 +45,17 @@ namespace FarmCord
             await _client.StartAsync();
             _client.Ready += () =>
            {
-              // ulong si = ServerBlackListDoc.ServerId;
+               // ulong si = ServerBlackListDoc.ServerId;
                // List<ServerBlackListDoc> serverBlackLists;
                // var  Sbl = serverBlackLists.ToArray();
-            //   var g = _client.GetGuild(ulong.Parse(si));
-             //  object p = g;
+               //   var g = _client.GetGuild(ulong.Parse(si));
+               //  object p = g;
                _client.SetGameAsync("Start your farm today!");
                var c = new MongoClient("mongodb://localhost:27017");
                var d = c.GetDatabase("DiscordUser");
                var co = d.GetCollection<object>("ServerBlackLists");
                //  var sbl = co.Find(
-           //    object filter = co.FindAsync<object>(g);
+               //    object filter = co.FindAsync<object>(g);
                //  if (sbl) return null;
                return Task.CompletedTask;
            };
@@ -98,7 +98,7 @@ namespace FarmCord
                 var message = messageParam as SocketUserMessage;
                 if (message == null) return;
                 int argPos = 0;
-                if (!(message.HasStringPrefix(creds.prefix.ToString().ToLower(), ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
+                if (!(message.HasStringPrefix(creds.prefix, ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))) return;
                 if (message.Author.IsBot) return;
                 var context = new SocketCommandContext(_client, message);
                 var result = await _commands.ExecuteAsync(

@@ -1,27 +1,41 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/sdk:5.0.102-ca-patch-buster-slim AS BUILDER
 
-WORKDIR /source
+WORKDIR /source/
 
-COPY *.csproj .
+COPY *.csproj /source/
 
-COPY /FarmCord .
+COPY ./ /source/
+
+RUN cd /source/
 
 RUN dotnet restore
 
 RUN dotnet build
 
-RUN cd ./bin/Debug/netcoreapp3.1
+RUN cd ./bin/Debug/net5.0/
 
-RUN mkdir FarmCord
+RUN cd  FarmCord
 
-RUN cd ./bin/Debug/netcoreapp3.1/FarmCord
+RUN mkdir FarmOutput/
 
-RUN cp ./FarmCord/creds.json /bin/Debug/netcoreapp3.1/FarmCord/creds.json
+RUN mkdir Assets/
 
-RUN mkdir Assets
+RUN cd ..
 
-RUN cp ./FarmCord/Assets/Island.png /bin/Debug/netcoreapp3.1/FarmCord/Assets
+RUN cd ..
 
-RUN mkdir FarmOutput
+RUN cd ..
 
-RUN dotnet run
+RUN cd ..
+
+RUN cd FarmCord
+
+COPY /FarmCord/creds.json ./source/bin/Debug/net5.0/FarmCord/
+
+COPY /FarmCord/Assets/Island.png ./source/bin/Debug/net5.0/FarmCord/Assets/
+
+RUN cd ..
+
+RUN cd ./bin/Debug/net5.0/
+
+CMD ["dotnet", "run", "FarmCord.dll"]
