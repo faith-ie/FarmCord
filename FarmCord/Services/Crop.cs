@@ -1,19 +1,27 @@
 ﻿
 namespace FarmCord.Services.Crop
 {
-   public class Crop
+    public class Crop
     {
-        public string CashBack;
-        public int NumberOfSeeds;
-        public bool Destructible;
-        public int ItemID;
-
-        public Crop(string CashBack, int NumberOfSeeds, bool Destructible, int ItemID)
+        string cashBack;
+        int numberOfSeeds;
+        bool destructible;
+        int itemID;
+        public string CashBack
         {
-            this.CashBack = CashBack;
-            this.NumberOfSeeds = NumberOfSeeds;
-            this.Destructible = Destructible;
-            this.ItemID = ItemID;
+            get; set;
+        }
+        public int NumberOfSeeds
+        {
+            get; set;
+        }
+        public bool Destructible
+        {
+            get; set;
+        }
+        public int ItemID
+        {
+            get; set;
         }
     }
 }
