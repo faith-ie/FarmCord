@@ -29,6 +29,7 @@ namespace FarmCord
         public static MongoService MongoService = null;
         public static DailyService DailyService = null;
         public static Crop Crop = null;
+
         private static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()

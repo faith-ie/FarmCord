@@ -1,6 +1,5 @@
 ﻿using Discord;
 using Discord.Commands;
-using System.Collections.Generic;
 using FarmCord.Services.DailyService;
 using FarmCord.Services.PrefixService;
 using ImageMagick;
@@ -25,12 +24,14 @@ namespace FarmCord.General.Module
             e.WithColor(3468126);
             await ReplyAsync(embed: e.Build());
         }
+
         /*  [Command("Contact")]
           [Summary("Contact the owner of the bot")]
           public async Task ContactAsync([Remainder][Summary("Contact the owner of the bot")] string contact = "")
           {
               await ReplyAsync("ok");
           }*/
+
         [Command("invite")]
         [Summary("invite the bot")]
         public async Task InviteAsync([Remainder][Summary("Invite the bot")] string invite = "")
@@ -40,6 +41,7 @@ namespace FarmCord.General.Module
             e.WithDescription("Invite me! https://discordapp.com/oauth2/authorize?client_id=630849680431120385&permissions=67423296&scope=bot");
             await ReplyAsync(embed: e.Build());
         }
+
         [Command("ping")]
         [Summary("Bots connection to Discord")]
         public async Task PingAsync()
@@ -60,7 +62,6 @@ namespace FarmCord.General.Module
             {
                 Console.WriteLine(E);
             }
-
         }
 
         [Command("shop")]
@@ -80,14 +81,12 @@ namespace FarmCord.General.Module
             {
                 Console.WriteLine(er);
             }
-
         }
 
         [Command("start")]
         [Summary("farming")]
         public async Task StartAsync([Remainder][Summary("Start a farm!")] string start = "")
         {
-
             /* var e = new EmbedBuilder();
              e.WithDescription("Would you like to start a farm? Yes or no?");
              e.WithColor(Color.DarkTeal);
@@ -111,14 +110,12 @@ namespace FarmCord.General.Module
                 // MemoryStream stream = new MemoryStream();
                 //   var ho = MemoryStream(CacheBytes);
 
-
                 /*       var o = image.ToByteArray();
                        var des = new EmbedFieldBuilder()
                            .WithValue(o);
                        var e = new EmbedBuilder()
                            .AddField(des);
                        await ReplyAsync(embed: e.Build()); */
-
 
                 await Context.Channel.SendFileAsync(filePath: $"./FarmCord/FarmOutput/Farm_{Context.User.Id}.png");
             }
@@ -130,9 +127,7 @@ namespace FarmCord.General.Module
                 E.WithDescription(Err.Message.ToString());
                 await Context.Channel.SendMessageAsync(text: "Oops, something went wrong.", embed: E.Build());
             }
-
         }
-
 
         [Command("prefix")]
         [Summary("set the bots prefix")]
@@ -162,10 +157,9 @@ namespace FarmCord.General.Module
                 E.WithColor(16519939);
                 E.WithDescription(e.Message.ToString());
                 await Context.Channel.SendMessageAsync(text: "Oops, something went wrong.", embed: E.Build());
-
             }
-
         }
+
         [Command("stats")]
         public async Task StatsAsync()
         {
@@ -188,6 +182,7 @@ namespace FarmCord.General.Module
             e.WithColor(3468126);
             await ReplyAsync(embed: e.Build());
         }
+
         [Command("daily")]
         [Alias("timely")]
         public async Task DailyAsync(ulong userid)
@@ -204,7 +199,6 @@ namespace FarmCord.General.Module
             var collection = db.GetCollection<object>("Dailies");
             try
             {
-
                 int moremoney = DS.Amount + 100;
                 var e = new EmbedBuilder();
                 e.WithDescription($"**{Context.User.Username.ToString()}**, FC${moremoney.ToString()} has been added to your account! Your balance is now {DS.Amount + moremoney}.");
@@ -222,5 +216,4 @@ namespace FarmCord.General.Module
             }
         }
     }
-
 }

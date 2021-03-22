@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace FarmCord.Services.ServerBlackListService
 {
     public class ServerBlackListDoc
@@ -7,14 +8,17 @@ namespace FarmCord.Services.ServerBlackListService
         {
             get; set;
         }
+
         public ulong ServerId
         {
             get; set;
         }
+
         public DateTime BanDate
         {
             get; set;
         }
+
         public string Reason
         {
             get; set;

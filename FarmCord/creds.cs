@@ -19,13 +19,14 @@
     {
         get; set;
     }
+
     public string OwnerID
     {
         get; set;
     }
+
     public int EmbedColor
     {
         get; set;
     }
-
 }

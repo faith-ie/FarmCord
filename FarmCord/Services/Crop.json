@@ -1,32 +1,32 @@
 {
-    "Carrot": {
-        "CashBack": "FC$75",
-        "NumberOfSeeds": 6,
-        "Destructible": true,
-        "ItemID": 1
-    },
-    "Wheat": {
-        "CashBack": "FC$85",
-        "NumberOfSeeds": 4,
-        "Destructible": true,
-        "ItemID": 2
-    },
-    "WaterMelon": {
-        "CashBack": "FC$90",
-        "NumberOfSeeds": 4,
-        "Destrutible": true,
-        "ItemID": 3
-    },
-    "Cantalope": {
-        "CashBack": "FC$60",
-        "NumberOfSeeds": 6,
-        "Destructible": true,
-        "ItemID": 4
-    },
-    "Corn": {
-        "CashBack": "FC$65",
-        "NumberOfSeeds": 5,
-        "Destructible": true,
-        "ItemID": 5
-    }
+  "Carrot": {
+    "CashBack": "FC$75",
+    "NumberOfSeeds": 6,
+    "Destructible": true,
+    "ItemID": 1
+  },
+  "Wheat": {
+    "CashBack": "FC$85",
+    "NumberOfSeeds": 4,
+    "Destructible": true,
+    "ItemID": 2
+  },
+  "WaterMelon": {
+    "CashBack": "FC$90",
+    "NumberOfSeeds": 4,
+    "Destrutible": true,
+    "ItemID": 3
+  },
+  "Cantalope": {
+    "CashBack": "FC$60",
+    "NumberOfSeeds": 6,
+    "Destructible": true,
+    "ItemID": 4
+  },
+  "Corn": {
+    "CashBack": "FC$65",
+    "NumberOfSeeds": 5,
+    "Destructible": true,
+    "ItemID": 5
+  }
 }

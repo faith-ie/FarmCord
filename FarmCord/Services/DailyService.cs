@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace FarmCord.Services.DailyService
 {
     public class DailyService
@@ -7,10 +8,12 @@ namespace FarmCord.Services.DailyService
         {
             get; set;
         }
+
         public int Amount
         {
             get; set;
         }
+
         public ulong UserID
         {
             get; set;

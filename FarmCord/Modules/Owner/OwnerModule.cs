@@ -11,7 +11,6 @@ namespace FarmCord.Owner.Module
     [RequireOwner]
     public class OwnerModule : ModuleBase
     {
-
         [Command("serverblacklist")]
         [Summary("Blacklists servers from using the bot")]
         [Alias("sbl")]
@@ -26,7 +25,6 @@ namespace FarmCord.Owner.Module
                 Reason = reason
             };
 
-
             var client = new MongoClient("mongodb://localhost:27017");
             var db = client.GetDatabase("DiscordUser");
             var collection = db.GetCollection<object>("ServerBlackLists");
@@ -39,19 +37,16 @@ namespace FarmCord.Owner.Module
                 e.WithColor(3468126);
                 await ReplyAsync(embed: e.Build());
             }
-
             catch (Exception e)
             {
-
                 Console.WriteLine(e);
                 var E = new EmbedBuilder();
                 E.WithColor(16519939);
                 E.WithDescription(e.Message.ToString());
                 await Context.Channel.SendMessageAsync(text: "OH FUCK I BROKE", embed: E.Build());
-
             }
-
         }
+
         [Command("userblacklist")]
         [Summary("Blacklists users from using the bot")]
         [Alias("ubl")]
@@ -73,7 +68,6 @@ namespace FarmCord.Owner.Module
 
             try
             {
-
                 await collection.InsertOneAsync(UBLD);
                 var e = new EmbedBuilder();
                 e.WithDescription($"User **{uname}** `{userid}` has been blacklisted. 👌");
@@ -88,8 +82,8 @@ namespace FarmCord.Owner.Module
                 E.WithDescription(e.Message.ToString());
                 await Context.Channel.SendMessageAsync(text: "OH FUCK I BROKE", embed: E.Build());
             }
-
         }
+
         [Command("dm")]
         [Summary("DM's a person")]
         public async Task DmAsync(string user, [Remainder] string dm = "")
@@ -120,6 +114,7 @@ namespace FarmCord.Owner.Module
                 await Context.Channel.SendMessageAsync(text: "OH FUCK I BROKE", embed: E.Build());
             }
         }
+
         [Command("listservers")]
         [Summary("list all the servers the bot is in")]
         public async Task ListServersAsync([Remainder][Summary("list all the servers the bot is in")] string listservers = "")
@@ -134,18 +129,21 @@ namespace FarmCord.Owner.Module
                 Console.ReadLine();
             }
         }
+
         [Command("setgame")]
         [Summary("sets the bot's game")]
         public async Task SetGameAsync([Remainder][Summary("Sets the bots game")] string setgame = "")
         {
             await ReplyAsync("gaming");
         }
+
         [Command("setstatus")]
         [Summary("Sets the bots status")]
         public async Task SetStatusAsync([Remainder][Summary("sets the bots status")] string setstatus = "")
         {
             await ReplyAsync("h");
         }
+
         [Command("shutdown")]
         [Summary("Shuts down the bot")]
         [Alias("die", "kill", "commit die")]
@@ -157,6 +155,5 @@ namespace FarmCord.Owner.Module
             await ReplyAsync(embed: e.Build());
             Environment.Exit(0);
         }
-
     }
 }
