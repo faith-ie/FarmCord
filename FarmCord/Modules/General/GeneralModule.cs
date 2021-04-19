@@ -185,25 +185,28 @@ namespace FarmCord.General.Module
 
         [Command("daily")]
         [Alias("timely")]
-        public async Task DailyAsync(ulong userid)
+        public async Task DailyAsync()
         {
-            IUser user = await Context.Client.GetUserAsync(userid);
+            MongoClient c;
+            IUser user = await Context.Client.GetUserAsync(Context.User.Id);
             var DS = new DailyService
             {
                 DailyDate = DateTime.UtcNow,
                 Amount = 0,
                 UserID = user.Id
             };
-            var client = new MongoClient("mongodb://localhost:27017");
-            var db = client.GetDatabase("DiscordUser");
+            c = new MongoClient("mongodb://localhost:27017");
+            var db = c.GetDatabase("DiscordUser");
+
             var collection = db.GetCollection<object>("Dailies");
             try
             {
+                // collection.Find<ulong>(Context.User.Id);
                 int moremoney = DS.Amount + 100;
                 var e = new EmbedBuilder();
-                e.WithDescription($"**{Context.User.Username.ToString()}**, FC${moremoney.ToString()} has been added to your account! Your balance is now {DS.Amount + moremoney}.");
+                e.WithDescription($"**{Context.User.Username.ToString()}**, FC${moremoney.ToString()} has been added to your account! Your balance is now {DS.Amount + 100}.");
                 e.WithColor(3468126);
-                await collection.InsertOneAsync(DS);
+                await collection.InsertOneAsync(moremoney);
                 await ReplyAsync(embed: e.Build());
             }
             catch (Exception e)

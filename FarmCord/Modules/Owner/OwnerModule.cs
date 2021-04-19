@@ -4,6 +4,7 @@ using FarmCord.Services.ServerBlackListService;
 using FarmCord.Services.UserBlackListService;
 using MongoDB.Driver;
 using System;
+using System.IO.Compression;
 using System.Threading.Tasks;
 
 namespace FarmCord.Owner.Module
@@ -154,6 +155,26 @@ namespace FarmCord.Owner.Module
             e.WithColor(3468126);
             await ReplyAsync(embed: e.Build());
             Environment.Exit(0);
+        }
+
+        [Command("backup")]
+        public async Task BackupAsync()
+        {
+            var me = "301379068941828096";
+            ZipFile.CreateFromDirectory("./bin/Debug/net5.0/FarmCord/FarmOutput", $"./FarmOutput_{DateTime.UtcNow.Year + "." + DateTime.UtcNow.Month + "." + DateTime.UtcNow.Day + "." + DateTime.UtcNow.Second}.zip");
+            IUser user = await Context.Client.GetUserAsync(ulong.Parse(me));
+            IDMChannel dm = await user.GetOrCreateDMChannelAsync();
+            try
+            {
+                await dm.SendFileAsync($"./FarmOutput_{DateTime.UtcNow.Year + "." + DateTime.UtcNow.Month + "." + DateTime.UtcNow.Day + "." + DateTime.UtcNow.Second}.zip");
+            }
+            catch (Exception e)
+            {
+                var E = new EmbedBuilder();
+                E.WithColor(16519939);
+                E.WithDescription(e.Message.ToString());
+                await Context.Channel.SendMessageAsync(text: "OH FUCK I BROKE", embed: E.Build());
+            }
         }
     }
 }

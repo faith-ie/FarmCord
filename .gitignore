@@ -11,3 +11,5 @@ obj
 creds.json
 
 FarmOutput
+
+*.sln
