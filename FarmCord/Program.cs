@@ -19,6 +19,7 @@ namespace FarmCord
 {
     public class Program
     {
+        public static MongoClient mongo;
         private DiscordSocketClient _client;
         private IServiceProvider _services;
         private CommandService _commands;
@@ -30,7 +31,7 @@ namespace FarmCord
         public static DailyService DailyService = null;
         public static Crop Crop = null;
 
-        private static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
+        private static async Task Main() => await new Program().MainAsync();
 
         public async Task MainAsync()
 
@@ -46,18 +47,7 @@ namespace FarmCord
             await _client.StartAsync();
             _client.Ready += () =>
            {
-               // ulong si = ServerBlackListDoc.ServerId;
-               // List<ServerBlackListDoc> serverBlackLists;
-               // var  Sbl = serverBlackLists.ToArray();
-               //   var g = _client.GetGuild(ulong.Parse(si));
-               //  object p = g;
                _client.SetGameAsync("Start your farm today!");
-               var c = new MongoClient("mongodb://localhost:27017");
-               var d = c.GetDatabase("DiscordUser");
-               var co = d.GetCollection<object>("ServerBlackLists");
-               //  var sbl = co.Find(
-               //    object filter = co.FindAsync<object>(g);
-               //  if (sbl) return null;
                return Task.CompletedTask;
            };
             _commands = new CommandService();
@@ -67,7 +57,6 @@ namespace FarmCord
         .AddSingleton<CommandHandler>()
         .BuildServiceProvider();
             await _services.GetRequiredService<CommandHandler>().InstallCommandsAsync();
-
             await Task.Delay(-1);
         }
 
